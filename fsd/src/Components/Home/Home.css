@@ -1,0 +1,176 @@
+.main-div {
+  height: 100vh;
+  overflow-y: scroll;
+  background: rgb(140, 164, 193);
+  background: linear-gradient(
+    4deg,
+    rgba(140, 164, 193, 1) 0%,
+    rgba(94, 111, 200, 1) 38%,
+    rgba(24, 4, 248, 1) 100%
+  );
+}
+
+.filed-background {
+  background-color: white;
+  margin: 4rem 5rem;
+  border-radius: 1rem;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 3rem 2rem;
+  flex-direction: column;
+}
+
+.form-container h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.form-container input[type="text"],
+.form-container input[type="date"] {
+  display: block;
+  width: 12rem;
+  margin: 0 1rem; /* Consolidated margin */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container input[type="date"] {
+  width: 15rem;
+}
+
+.input-form {
+  height: 2rem;
+  font-size: 1.5rem;
+  padding: 1.5rem;
+}
+
+.colom,
+.resp-100 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container button {
+  display: block;
+  width: 12rem;
+  background-color: #121bcb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 1rem; /* Consolidated margin */
+  height: 3rem;
+  font-size: 1.5rem;
+}
+
+.form-container button:hover {
+  background-color: #2934ff;
+}
+
+@media screen and (max-width: 1200px) {
+  .filed-background {
+    margin: 5rem 4rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .filed-background {
+    margin: 5rem 4.5rem;
+  }
+  .form-container {
+    overflow-x: hidden;
+  }
+  .form-container input[type="text"],
+  .form-container input[type="date"] {
+    width: 12rem;
+    margin: 0;
+  }
+  .form-container input[type="date"] {
+    width: 12rem;
+    font-size: 1.3rem;
+  }
+  .form-container h1 {
+    margin-bottom: 0.5rem;
+  }
+  .colom {
+    flex-direction: column;
+  }
+  .resp-100 {
+    margin: 2rem 0;
+    justify-content: space-between;
+    /* gap: 1rem; */
+  }
+  .form-container button {
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .filed-background {
+    margin: 5rem 4rem;
+  }
+
+  .form-container {
+    height: 30rem;
+    overflow-x: hidden;
+  }
+  .colom {
+    flex-direction: column;
+  }
+  .resp-100 {
+    margin: 2rem 0;
+    margin-bottom: 0;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .form-container input[type="text"],
+  .form-container input[type="date"] {
+    width: 15rem;
+    margin: 0 0rem;
+  }
+  .form-container button {
+    width: 15rem;
+    margin: 0 0rem;
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .filed-background {
+    margin: 5rem 2rem;
+  }
+
+  .form-container input[type="text"],
+  .form-container input[type="date"] {
+    width: 13.5rem;
+  }
+  .form-container button {
+    width: 13.5rem;
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 345px) {
+  .form-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0rem;
+    text-align: center;
+  }
+  .form-container input[type="text"],
+  .form-container input[type="date"] {
+    width: 10.5rem;
+    font-size: 1rem;
+  }
+  .form-container button {
+    width: 10.5rem;
+    margin-top: 2rem;
+  }
+}
