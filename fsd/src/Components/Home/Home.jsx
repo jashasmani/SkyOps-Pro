@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Booking from "./Booking";
-import Result from './FlightData';
-import Footer from '../Footer/Footer'
+import Result from "./FlightData";
+import Footer from "../Footer/Footer";
 
 import "./Home.css";
 
-
 const Home = () => {
-  const [booking,setBooking]=useState(false);
+  const [booking, setBooking] = useState(false);
   return (
     <>
       <section>
@@ -19,10 +18,9 @@ const Home = () => {
           <div className="filed-background">
             <Booking setBooking={setBooking} />
           </div>
-         
-            {booking?<Result/>:""}
-          {/* </div> */}
-        <Footer/>
+
+          {booking ? <Result /> : ""}
+          <Footer />
         </div>
       </section>
     </>

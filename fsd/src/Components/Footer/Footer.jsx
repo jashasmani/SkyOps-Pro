@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="text-center text-black" style={{backgroundColor: '#F1F6F9'}}>
+    <footer className="text-center text-black" style={{backgroundColor: '#F1F6F9',marginTop:'5rem'}}>
         {/*  F1F6F9*/}
       <div className="container">
         <section className="mt-5" style={{overflowX:'hidden'}}>

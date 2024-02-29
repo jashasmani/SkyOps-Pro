@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./Login.css";
 import EmailIcon from "@mui/icons-material/Email";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import GoogleIcon from "@mui/icons-material/Google";
-import GitHubIcon from "@mui/icons-material/GitHub";
+// import GoogleIcon from "@mui/icons-material/Google";
+// import GitHubIcon from "@mui/icons-material/GitHub";
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -21,7 +21,7 @@ const LoginForm = () => {
 
   return (
     <div className="bg-img">
-      <header className="header">
+      {/* <header className="header">
         <nav className="nav">
           <a href="#" className="nav_logo">
             CodingLab
@@ -46,7 +46,7 @@ const LoginForm = () => {
             Login
           </button>
         </nav>
-      </header>
+      </header> */}
       <div className="content">
         <header>Login </header>
         <form action="#">
@@ -85,7 +85,7 @@ const LoginForm = () => {
             </button>
           </div>
         </form>
-        <div className="login">Or login with</div>
+        {/* <div className="login">Or login with</div>
         <div className="links">
           <div className="google">
             <span>
@@ -104,7 +104,7 @@ const LoginForm = () => {
         <div className="signup">
           Don't have account?
           <Link to="/signup"> Signup Now</Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -5,29 +5,33 @@ import EmailIcon from "@mui/icons-material/Email";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import axios from "axios";
+import GoogleIcon from "@mui/icons-material/Google";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import { Link, useNavigate } from "react-router-dom";
+
+import Alert from "@mui/material/Alert";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
+  const [number, setNumber] = useState();
   const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("Login");
+  const [error, setError] = useState(false);
 
   const nav = useNavigate();
-  const handlePasswordVisibility = (e) => {
-    setPassword(e.target.value);
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/login", {
-        email,
-        password,
-      });
+      const response = await axios.get(
+        `http://localhost:8080/api/user/${email}/${password}`
+      );
       console.log(response.data);
+      nav("/");
       // Handle successful login
     } catch (error) {
-      console.error("Login error:", error);
+      setError(true);
+      console.log("Invalid email or password");
       // Handle login error
     }
   };
@@ -35,19 +39,23 @@ const LoginForm = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/register", {
+      const response = await axios.post("http://localhost:8080/api/user", {
         email,
         number,
         password,
       });
       console.log(response.data);
+      // setEmail("");
+      // setPassword("");
+      // setNumber("");
+      setTitle("Login");
     } catch (error) {
       console.error("Registration error:", error);
     }
   };
   return (
     <div className="bg-img">
-      <header className="header">
+      {/* <header className="header">
         <nav className="nav">
           <a href="#" className="nav_logo">
             CodingLab
@@ -72,37 +80,85 @@ const LoginForm = () => {
             Login
           </button>
         </nav>
-      </header>
+      </header> */}
       <div className="content">
-        <header>Sign Up</header>
+        {/* {error && (
+        <Alert variant="filled" severity="error"style={{zIndex:'999'}}>
+          This is a filled error Alert.
+        </Alert>
+      )} */}
+        <header className="errortitle">
+          {title === "Login" ? "Login" : "Sign Up"}
+
+          {error && (
+            <span className="errorText">Invalid email or password</span>
+          )}
+        </header>
         <form action="#">
-          <div className="field">
+          <div
+            className="field"
+            style={{
+              borderColor: error ? "red" : "initial",
+              borderWidth: error ? "2px" : "initial",
+              borderStyle: error ? "solid" : "initial",
+            }}
+          >
             <span className="small-icon">
-              <EmailIcon />
+              <EmailIcon
+                style={{
+                  color: error ? "red" : "black",
+                }}
+              />
+              {error && (
+                <span className="error" style={{ color: "red" }}>
+                  !
+                </span>
+              )}
             </span>
             <input
               type="text"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              // required
+              required
             />
           </div>
-          <div className="field space">
+
+          {title === "Login" ? (
+            ""
+          ) : (
+            <div className="field space">
+              <span className="small-icon">
+                <ContactsIcon />
+              </span>
+              <input
+                type="number"
+                placeholder="Phone number"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+                required
+              />
+            </div>
+          )}
+          <div
+            className="field space"
+            style={{
+              borderColor: error ? "red" : "initial",
+              borderWidth: error ? "2px" : "initial",
+              borderStyle: error ? "solid" : "initial",
+            }}
+          >
             <span className="small-icon">
-              <ContactsIcon />
-            </span>
-            <input
-              type="text"
-              placeholder="Phone number"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-              // required
-            />
-          </div>
-          <div className="field space">
-            <span className="small-icon">
-              <LockOpenIcon />
+              <LockOpenIcon
+                style={{
+                  color: error ? "red" : "black",
+                }}
+              />
+              {error && (
+                <span className="error" style={{ color: "red" }}>
+                  !
+                </span>
+              )}
             </span>
             <input
               type="password"
@@ -110,29 +166,66 @@ const LoginForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              // required
+              required
             />
-            <span className="show" onClick={handlePasswordVisibility}>
-              {/* {passwordType === "password" ? "SHOW" : "HIDE"} */}
-            </span>
           </div>
-          <div className="pass">{/* <a href="#">Forgot Password?</a> */}</div>
+          {title === "Login" ? (
+            <div className="pass">
+              {" "}
+              <a href="#">Forgot Password?</a>{" "}
+            </div>
+          ) : (
+            <br></br>
+          )}
           <div className="field">
             <button
               type="submit"
               className="login-button"
-              onClick={() => nav("/login")}
+              onClick={title === "Login" ? handleLogin : handleRegister}
             >
-              Sign Up
+              {title}
             </button>
           </div>
         </form>
 
         <div className="links"></div>
-        <div className="back-signup">
-          <ArrowBackIcon />
-          <Link to="/login">Back To Login</Link>
-        </div>
+        {title !== "Login" ? (
+          <div className="back-signup">
+            <ArrowBackIcon />
+            <Link onClick={() => setTitle("Login")}>Back To Login</Link>
+          </div>
+        ) : (
+          <>
+            <div className="login">Or login with</div>
+            <div className="links">
+              <div className="google">
+                <span>
+                  <GoogleIcon />
+                </span>
+              </div>
+              <span className="google-text" style={{ fontSize: "2rem" }}>
+                or
+              </span>
+              <div className="google">
+                <span>
+                  <GitHubIcon />
+                </span>
+              </div>
+            </div>
+            <div className="signup">
+              Don't have account?
+              <Link
+                onClick={() => {
+                  setTitle("Sign Up");
+                  setError(false);
+                }}
+              >
+                {" "}
+                Signup Now
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

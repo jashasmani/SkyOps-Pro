@@ -204,3 +204,23 @@
 .back-signup a:hover {
   text-decoration: underline;
 }
+
+
+.error{
+  color: red;
+  
+  font-size: 1.5rem;
+  margin-left: 5px;
+}
+
+.errorText{
+  color: red;
+  font-size: 1.2rem;
+  /* margin-left: 5px; */
+  margin-top: 0.5rem;
+}
+
+.errortitle{
+  display: flex;
+  flex-direction: column;
+}
