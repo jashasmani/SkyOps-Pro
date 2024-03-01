@@ -1,0 +1,32 @@
+/* @media (max-width: 990px) {
+  .show-content {
+    width: 50rem;
+  }
+} */
+
+@media (max-width: 770px) {
+  .straight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .straight-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .side-gap {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 350px) {
+  .setWidth {
+    width: "10rem";
+  }
+}

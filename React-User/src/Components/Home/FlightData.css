@@ -1,0 +1,64 @@
+.flightdata-background {
+  background-color: white;
+  margin: 4rem 5rem;
+  border-radius: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.source-time,
+.arrival-time {
+  /* width: 20%; */
+  display: flex;
+  flex-direction: column;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  height: 4rem;
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+td {
+  height: 4rem;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+td:last-child {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+td:last-child:hover {
+  background-color: #0069d9;
+}
+
+@media screen and (max-width: 768px) {
+  .flightdata-background {
+    margin: 5rem 2rem;
+  }
+
+  .source-time,
+  .arrival-time {
+    width: auto;
+  }
+
+  td,
+  th {
+    font-size: 12px;
+  }
+}

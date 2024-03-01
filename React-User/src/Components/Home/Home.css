@@ -1,0 +1,11 @@
+.main-div {
+  height: 100vh;
+  overflow-y: scroll;
+  background: rgb(140, 164, 193);
+  background: linear-gradient(
+    4deg,
+    rgba(140, 164, 193, 1) 0%,
+    rgba(94, 111, 200, 1) 38%,
+    rgba(24, 4, 248, 1) 100%
+  );
+}
