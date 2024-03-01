@@ -41,7 +41,7 @@ const TicketDownload = () => {
   return (
     <>
       <section style={{ height: "100vh", overflowY: "scroll" }}>
-        <div className="p-3 border border-dark" ref={pdfRef}>
+        <div className="p-3 border border-dark" >
           <div class="d-flex justify-content-end m-2">
             <button
               type="button"
@@ -51,7 +51,7 @@ const TicketDownload = () => {
               Download
             </button>
           </div>
-          <div className="border border-dark rounded-5">
+          <div className="border border-dark rounded-5" ref={pdfRef}>
             <div className="d-flexflex-coloumn justify-content-center align-items-center flex-wrap ">
               <h2 className="text-center bg-primary text-white py-2">
                 SkyOps Pro
