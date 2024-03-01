@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { button, message, Steps, theme } from "antd";
-import Status1 from "./Status1";
+import { message, Steps, theme } from "antd";
+import Ticket from "./Ticket";
+import Verifcation from "./Verifcation";
+import Payment from "./Payment";
+import Done from "./Done";
 import "./Status.css";
 import AirlineSeatReclineNormalIcon from "@mui/icons-material/AirlineSeatReclineNormal";
 import {
@@ -9,7 +12,7 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 
-const ShowStatus = ({ setOpen,price }) => {
+const ShowStatus = ({ setOpen, price }) => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
   const steps = [
@@ -28,7 +31,7 @@ const ShowStatus = ({ setOpen,price }) => {
       ),
       status: "finish",
       icon: <AirlineSeatReclineNormalIcon />,
-      content: <Status1 price={price}/>,
+      content: <Ticket price={price} />,
     },
     {
       title: (
@@ -45,6 +48,7 @@ const ShowStatus = ({ setOpen,price }) => {
       ),
       status: current <= 0 ? "wait" : "finish",
       icon: <SolutionOutlined />,
+      content: <Verifcation />,
     },
     {
       title: (
@@ -62,11 +66,13 @@ const ShowStatus = ({ setOpen,price }) => {
       icon: current <= 1 ? <LoadingOutlined /> : "",
       status: current <= 1 ? "wait" : "finish",
       //   status: "process",
+      content: <Payment />,
     },
     {
       title: "Done",
       status: current <= 2 ? "wait" : "finish",
       icon: <SmileOutlined />,
+      content: <Done />,
     },
   ];
   const next = () => {
@@ -81,7 +87,7 @@ const ShowStatus = ({ setOpen,price }) => {
   //   }));
 
   const contentStyle = {
-    lineHeight: "260px",
+    maxHeight: "400px",
     textAlign: "center",
     color: token.colorTextTertiary,
     marginTop: 16,

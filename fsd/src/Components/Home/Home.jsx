@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import Booking from "./Booking";
 import Result from "./FlightData";
 import Footer from "../Footer/Footer";
-
+import "./Booking.css";
 import "./Home.css";
 
 const Home = () => {
@@ -15,11 +15,10 @@ const Home = () => {
           <header>
             <Navbar />
           </header>
-          <div className="filed-background">
+          <div className="side-gap">
             <Booking setBooking={setBooking} />
+            {booking ? <Result /> : ""}
           </div>
-
-          {booking ? <Result /> : ""}
           <Footer />
         </div>
       </section>

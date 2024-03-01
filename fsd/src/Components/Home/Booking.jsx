@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import MultipleStopIcon from "@mui/icons-material/MultipleStop";
-import imgplane from "./plane.png";
 import airports from "../Airport/AirpostName.js";
 
 const BookingForm = ({ setBooking }) => {
   const [departureCity, setDepartureCity] = useState("");
-  const [destCity, setDestCity] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [selectedAirport, setSelectedAirport] = useState(null);
 
@@ -16,14 +14,6 @@ const BookingForm = ({ setBooking }) => {
       departureCity,
       departureDate,
     });
-  };
-
-  const handleDepartureCityChange = (e) => {
-    setDepartureCity(e.target.value);
-  };
-
-  const handleDestCityChange = (e) => {
-    setDestCity(e.target.value);
   };
 
   const handleDepartureDateChange = (e) => {
@@ -39,22 +29,24 @@ const BookingForm = ({ setBooking }) => {
   };
 
   return (
-    <Container className="bg-white mt-5 rounded-4  ">
-      <Row>
-        <Col>
+    <Container className="bg-white mt-5 rounded-4 ">
+      <Row >
+        <Col >
           <h1 className="text-center p-2 mb-5 mt-5">Flight Booking</h1>
           <Form
             onSubmit={handleSubmit}
-            className="row d-flex justify-content-around g-3 mb-5 "
+            className="row d-flex justify-content-around g-3 mb-5 straight"
           >
-            <div className=" g-2  row col-md-5 d-flex justify-content-between ">
+            <div
+              className=" d-flex justify-content-around straight-2"
+              style={{ width: "25rem" }}
+            >
               <Form.Group
-                className="mb-3 "
+                className="mb-3 setWidth"
                 style={{ width: "12rem" }}
                 controlId="departureCity"
               >
-                {/* <Form.Label>From</Form.Label> */}
-                <Form.Select className="w-5" onChange={handleAirportSelect}>
+                <Form.Select className="w-5 " onChange={handleAirportSelect}>
                   <option value="">From</option>
                   {airports.map((airport, index) => (
                     <option key={index} value={airport.code}>
@@ -62,14 +54,17 @@ const BookingForm = ({ setBooking }) => {
                     </option>
                   ))}
                 </Form.Select>
+                
               </Form.Group>
-              <MultipleStopIcon style={{ color: "black", fontSize: "3rem" }} />
+              <MultipleStopIcon
+                className="mx-1 mb-3"
+                style={{ color: "black", fontSize: "2.5rem" }}
+              />
               <Form.Group
-                className="mb-3"
+                className="mb-3 setWidth"
                 style={{ width: "12rem" }}
                 controlId="destCity"
               >
-                {/* <Form.Label>To</Form.Label> */}
                 <Form.Select onChange={handleAirportSelect}>
                   <option value="">To</option>
                   {airports.map((airport, index) => (
@@ -81,12 +76,12 @@ const BookingForm = ({ setBooking }) => {
               </Form.Group>
             </div>
             <Form.Group
-              className="mb-3"
-              style={{ width: "12rem" }}
+              className="mb-3 setWidth"
+              style={{ width: "13rem" }}
               controlId="departureDate"
               label="date"
             >
-              {/* <Form.Label>Departure Date</Form.Label> */}
+             
               <Form.Control
                 type="date"
                 name="date"
@@ -95,12 +90,12 @@ const BookingForm = ({ setBooking }) => {
               />
             </Form.Group>
             <Form.Group
-              className="mb-3"
-              style={{ width: "12rem" }}
+              className="mb-3 setWidth"
+              style={{ width: "13rem" }}
               controlId="departureDate"
               label="date"
             >
-              {/* <Form.Label>Departure Date</Form.Label> */}
+             
               <Form.Control
                 type="date"
                 name="date"

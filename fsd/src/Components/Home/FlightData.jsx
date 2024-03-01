@@ -7,7 +7,7 @@ import DataModel from "../Model/DataModel.jsx";
 const FlightTable = () => {
   const flightsData = data;
   return (
-    <Container className="bg-white rounded-4 my-5">
+    <Container className="bg-white rounded-4 my-5 ">
       <div className="table-responsive">
         <table className="table">
           <thead>
