@@ -4,6 +4,7 @@ import MultipleStopIcon from "@mui/icons-material/MultipleStop";
 import airports from "../Airport/AirpostName.js";
 
 const BookingForm = ({ setBooking }) => {
+  
   const [departureCity, setDepartureCity] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [selectedAirport, setSelectedAirport] = useState(null);

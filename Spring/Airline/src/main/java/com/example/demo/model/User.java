@@ -1,4 +1,4 @@
-package com.airline.user.model;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 
@@ -8,7 +8,7 @@ public class User {
 
     @Column
 //    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Id

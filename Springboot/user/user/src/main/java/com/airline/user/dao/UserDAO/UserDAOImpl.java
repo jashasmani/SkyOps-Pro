@@ -1,4 +1,4 @@
-package com.airline.user.dao;
+package com.airline.user.dao.UserDAO;
 
 import com.airline.user.model.User;
 import jakarta.persistence.EntityManager;

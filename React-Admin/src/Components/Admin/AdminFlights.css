@@ -12,7 +12,7 @@
     align-items: center;
     height: 96vh;
   }
-  .form-container-busdata    {
+  .form-container-flightdata    {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

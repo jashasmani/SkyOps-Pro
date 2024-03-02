@@ -1,39 +1,39 @@
 // import React, { useState } from 'react';
-// import './BusForm.css';
+// import './FlightForm.css';
 // import axios from 'axios';
 
-// function BusForm() {
+// function FlightForm() {
 
-//     const [busNumber, setBusNumber] = useState('');
+//     const [flightNumber, setFlightNumber] = useState('');
 //     const [capacity, setCapacity] = useState('');
-//     // const [busData, setBusData] = useState({
-//     //     busNumber: '',
+//     // const [flightData, setFlightData] = useState({
+//     //     flightNumber: '',
 //     //     capacity: ''
 //     // });
 
 //     const handleSubmit = async (e) => {
 //         e.preventDefault();
-//         // Send busData to the server (POST request)
-//         const response = await axios.post("http://localhost:8080/bus/add", {
-//            busNumber,
+//         // Send flightData to the server (POST request)
+//         const response = await axios.post("http://localhost:8080/flight/add", {
+//            flightNumber,
 //            capacity,
 //           });
 //           console.log(response.data);
-//         // console.log('Bus data submitted:', busData);
+//         // console.log('Flight data submitted:', flightData);
 //     };
 
 //     return (
-//         <div className='body_bus2'>
-//             {/* <h2 className='custom-bus-form'>Add New Bus</h2> */}
-//             <form onSubmit={handleSubmit} className='custom-bus-form'>
+//         <div className='body_flight2'>
+//             {/* <h2 className='custom-flight-form'>Add New Flight</h2> */}
+//             <form onSubmit={handleSubmit} className='custom-flight-form'>
 //                 <label className='custom-label'>
-//                     Bus Number:
+//                     Flight Number:
 //                     </label>
 //                     <input className='custom-input'
 //                         type="text"
-//                         name="busNumber"
-//                         value={busNumber}
-//                         onChange={(e) => setBusNumber(e.target.value)}
+//                         name="flightNumber"
+//                         value={flightNumber}
+//                         onChange={(e) => setFlightNumber(e.target.value)}
 //                     />
 //                 <br />
 //                 <label className='custom-label'>
@@ -46,42 +46,42 @@
 //                         onChange={(e) => setCapacity(e.target.value)}
 //                     />
 //                 <br />
-//                 <button className='custom-button' type="submit">Add Bus</button>
+//                 <button className='custom-button' type="submit">Add Flight</button>
 //             </form>
 //         </div>
 //     );
 // }
 
-// export default BusForm;
+// export default FlightForm;
 
 import React, { useState } from "react";
 import axios from "axios";
-import './BusForm.css';
+import './FlightForm.css';
 
 
-function BusForm() {
-//   const [busData, setBusData] = useState({
-//     busNumber: "",
+function FlightForm() {
+//   const [flightData, setFlightData] = useState({
+//     flightNumber: "",
 //     capacity: "",
 //     routes: [
 //       { origin: "", destination: "" }, // Initial route
 //     ],
 //   });
 
-  const [busNumber, setBusNumber] = useState('');
+  const [flightNumber, setFlightNumber] = useState('');
   const [capacity, setCapacity] = useState('');
   const [routes, setRoutes] = useState([{ origin: '', destination: '' }]);
 //   const handleChange = (e, index) => {
 //     const { name, value } = e.target;
 //     if (name === "origin" || name === "destination") {
-//       const routes = [...busData.routes];
+//       const routes = [...flightData.routes];
 //       routes[index][name] = value;
-//       setBusData((prevState) => ({
+//       setFlightData((prevState) => ({
 //         ...prevState,
 //         routes,
 //       }));
 //     } else {
-//       setBusData((prevState) => ({
+//       setFlightData((prevState) => ({
 //         ...prevState,
 //         [name]: value,
 //       }));
@@ -95,7 +95,7 @@ const handleRouteChange = (index, field, value) => {
 };
 
 //   const handleAddRoute = () => {
-//     setBusData((prevState) => ({
+//     setFlightData((prevState) => ({
 //       ...prevState,
 //       routes: [...prevState.routes, { origin: "", destination: "" }],
 //     }));
@@ -107,13 +107,13 @@ const addRoute = () => {
 
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
-//     console.log("Bus data submitted:", busData);
-//     // Send busData to the server (POST request)
+//     console.log("Flight data submitted:", flightData);
+//     // Send flightData to the server (POST request)
 
 //     const response = await axios.post(
-//       "http://localhost:8080/bus/add",
-//       { busData }
-//       // busNumber,
+//       "http://localhost:8080/flight/add",
+//       { flightData }
+//       // flightNumber,
 //       // capacity,
 //       // routes,
 //     );
@@ -123,27 +123,27 @@ const addRoute = () => {
 const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post("http://localhost:8080/bus/add", {
-            busNumber,
+        const response = await axios.post("http://localhost:8080/flight/add", {
+            flightNumber,
             capacity,
             routes,
         });
         console.log(response.data);
     } catch (error) {
-        console.error('Error submitting bus data:', error);
+        console.error('Error submitting flight data:', error);
     }
 };
 
   return (
-    <div className='body_bus2'>      {/* <h2>Add New Bus</h2> */}
-      <form onSubmit={handleSubmit} className='custom-bus-form'>
+    <div className='body_flight2'>      {/* <h2>Add New Flight</h2> */}
+      <form onSubmit={handleSubmit} className='custom-flight-form'>
         <label className='custom-label'>
-          Bus Number:
+          Flight Number:
           <input className='custom-input'
             type="text"
-            name="busNumber"
-            value={busNumber}
-            onChange={(e) => setBusNumber(e.target.value)}
+            name="flightNumber"
+            value={flightNumber}
+            onChange={(e) => setFlightNumber(e.target.value)}
           />
         </label >
         <br />
@@ -185,10 +185,10 @@ const handleSubmit = async (e) => {
           Add Route
         </button>
         <br />
-        <button className='custom-button' type="submit">Add Bus</button>
+        <button className='custom-button' type="submit">Add Flight</button>
       </form>
     </div>
   );
 }
 
-export default BusForm;
+export default FlightForm;

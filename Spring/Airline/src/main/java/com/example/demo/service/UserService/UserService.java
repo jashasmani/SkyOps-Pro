@@ -1,13 +1,16 @@
-package com.airline.user.service.UserService;
+package com.example.demo.service.UserService;
 
-import com.airline.user.model.User;
+
+import com.example.demo.model.User;
+
 import java.util.List;
 
 public interface UserService {
     List<User> get();
 
-//    User get(int id);
-User get(String email);
+    //    User get(int id);
+    User get(String email);
+
     void save(User user);
 
     void delete(int id);

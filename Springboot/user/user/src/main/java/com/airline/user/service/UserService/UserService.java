@@ -1,4 +1,4 @@
-package com.airline.user.service;
+package com.airline.user.service.UserService;
 
 import com.airline.user.model.User;
 import java.util.List;

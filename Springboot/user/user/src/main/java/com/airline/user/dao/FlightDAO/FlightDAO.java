@@ -1,15 +1,17 @@
-package com.airline.user.dao.UserDAO;
+package com.airline.user.dao.FlightDAO;
 
-import com.airline.user.model.User;
+import com.airline.user.model.Flights;
+
 import java.util.List;
 
-public interface UserDAO {
+public interface FlightDAO {
 
-    List<User> get();
+    List<Flights> get();
 
-//    User get(int id);
-User get(String email);
-    void save(User user);
+    //    User get(int id);
+    Flights get(String flights);
+
+    void save(Flights flights);
 
     void delete(int id);
 }

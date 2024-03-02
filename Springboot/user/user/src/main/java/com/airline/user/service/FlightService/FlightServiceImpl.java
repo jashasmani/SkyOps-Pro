@@ -1,8 +1,7 @@
-package com.airline.user.service.UserService;
+package com.airline.user.service.FlightService;
 
-import com.airline.user.dao.UserDAO;
-import com.airline.user.model.User;
-import com.airline.user.service.UserService.UserService;
+import com.airline.user.dao.FlightDAO.FlightDAO;
+import com.airline.user.model.Flights;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,35 +9,35 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class FlightServiceImpl implements FlightService {
 
     @Autowired
-    private UserDAO userDAO;
+    private FlightDAO flightDAO;
 
     @Transactional
     @Override
-    public List<User> get() {
-        return userDAO.get();
+    public List<Flights> get() {
+        return flightDAO.get();
     }
 
 
     @Transactional
     @Override
-    public User get(String email) {
-        return userDAO.get(email);
+    public Flights get(String flights) {
+        return flightDAO.get(flights);
     }
 
 
     @Transactional
     @Override
-    public void save(User user) {
-        userDAO.save(user);
+    public void save(Flights flights) {
+        flightDAO.save(flights);
     }
 
 
     @Transactional
     @Override
     public void delete(int id) {
-        userDAO.delete(id);
+        flightDAO.delete(id);
     }
 }

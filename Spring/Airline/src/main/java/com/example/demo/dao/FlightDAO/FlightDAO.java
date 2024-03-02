@@ -1,6 +1,6 @@
-package com.airline.user.dao.FlightDAO;
+package com.example.demo.dao.FlightDAO;
 
-import com.airline.user.model.Flights;
+import com.example.demo.model.Flights;
 
 import java.util.List;
 

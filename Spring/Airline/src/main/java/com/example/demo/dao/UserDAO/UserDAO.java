@@ -1,6 +1,8 @@
-package com.airline.user.dao.UserDAO;
+package com.example.demo.dao.UserDAO;
 
-import com.airline.user.model.User;
+
+
+import com.example.demo.model.User;
 
 import java.util.List;
 

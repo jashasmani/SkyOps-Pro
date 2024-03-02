@@ -1,6 +1,7 @@
-package com.airline.user.dao.UserDAO;
+package com.example.demo.dao.UserDAO;
 
-import com.airline.user.model.User;
+
+import com.example.demo.model.User;
 import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;

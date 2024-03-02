@@ -1,6 +1,7 @@
-package com.airline.user.dao.UserDAO;
+package com.airline.user.dao.FlightDAO;
 
-import com.airline.user.model.User;
+
+import com.airline.user.model.Flights;
 import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -10,35 +11,35 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserDAOImpl implements UserDAO{
+public class FlightDAOImpl implements FlightDAO {
 
     @Autowired
     private EntityManager entityManager;
 
     @Override
-    public List<User> get() {
-        Session session=entityManager.unwrap(Session.class);
-       Query<User> query= session.createQuery("From User",User.class);
-     List<User> list=query.getResultList();
-     return list;
+    public List<Flights> get() {
+        Session session = entityManager.unwrap(Session.class);
+        Query<Flights> query = session.createQuery("From Flights", Flights.class);
+        List<Flights> list = query.getResultList();
+        return list;
     }
 
     @Override
-    public User get(String email) {
-        Session session=entityManager.unwrap(Session.class);
-        return session.get(User.class,email);
+    public Flights get(String flights) {
+        Session session = entityManager.unwrap(Session.class);
+        return session.get(Flights.class, flights);
     }
 
     @Override
-    public void save(User user) {
-    Session session=entityManager.unwrap(Session.class);
-    session.saveOrUpdate(user);
+    public void save(Flights flights) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(flights);
     }
 
     @Override
     public void delete(int id) {
-        Session session=entityManager.unwrap(Session.class);
-        User user=session.get(User.class,id);
-        session.delete(user);
+        Session session = entityManager.unwrap(Session.class);
+        Flights flights = session.get(Flights.class, id);
+        session.delete(flights);
     }
 }

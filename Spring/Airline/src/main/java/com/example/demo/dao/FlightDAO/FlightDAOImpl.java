@@ -1,10 +1,11 @@
-package com.airline.user.dao.FlightDAO;
+package com.example.demo.dao.FlightDAO;
 
 
-import com.airline.user.model.Flights;
+
+import com.example.demo.model.Flights;
+import org.hibernate.query.Query;
 import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +21,7 @@ public class FlightDAOImpl implements FlightDAO {
     public List<Flights> get() {
         Session session = entityManager.unwrap(Session.class);
         Query<Flights> query = session.createQuery("From Flights", Flights.class);
-        List<Flights> list = query.getResultList();
-        return list;
+        return query.getResultList();
     }
 
     @Override

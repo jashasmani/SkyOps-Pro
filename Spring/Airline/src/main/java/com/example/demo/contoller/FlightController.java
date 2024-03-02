@@ -1,8 +1,9 @@
-package com.airline.user.contoller;
+package com.example.demo.contoller;
 
 
-import com.airline.user.model.Flights;
-import com.airline.user.service.FlightService.FlightService;
+
+import com.example.demo.model.Flights;
+import com.example.demo.service.FlightService.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

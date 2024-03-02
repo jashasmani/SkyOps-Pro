@@ -1,14 +1,16 @@
-package com.airline.user.service.UserService;
+package com.airline.user.service.FlightService;
 
-import com.airline.user.model.User;
+
+import com.airline.user.model.Flights;
 import java.util.List;
 
-public interface UserService {
-    List<User> get();
+public interface FlightService {
+    List<Flights> get();
 
-//    User get(int id);
-User get(String email);
-    void save(User user);
+    //    Flights get(int id);
+    Flights get(String flights);
+
+    void save(Flights flights);
 
     void delete(int id);
 }

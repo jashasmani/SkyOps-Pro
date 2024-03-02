@@ -1,7 +1,8 @@
-package com.airline.user.contoller;
+package com.example.demo.contoller;
 
-import com.airline.user.model.User;
-import com.airline.user.service.UserService.UserService;
+
+import com.example.demo.model.User;
+import com.example.demo.service.UserService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,28 +13,29 @@ import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping ("/api")
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @GetMapping("/user")
-    public List<User> get(){
+    public List<User> get() {
         return userService.get();
     }
 
     @PostMapping("/user")
     public User save(@RequestBody User userobj) {
         userService.save(userobj);
-        return  userobj;
+        return userobj;
     }
+
     @GetMapping("/user/{email}/{password}")
-    public ResponseEntity<?> getLogin(@PathVariable Map<String,String> map) {
+    public ResponseEntity<?> getLogin(@PathVariable Map<String, String> map) {
         User userobj = userService.get(map.get("email"));
 
         if (userobj == null) {
-            throw  new RuntimeException("User not Found By ID :"+map.get("email"));
+            throw new RuntimeException("User not Found By ID :" + map.get("email"));
         }
         if (userobj.getPassword().equals(map.get("password"))) {
             return ResponseEntity.ok(userobj); // Login successful

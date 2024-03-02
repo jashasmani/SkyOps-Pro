@@ -1,23 +1,20 @@
 import "./App.css";
 import React from "react";
-import BusForm from "./Components/BusForm/BusForm";
-// import Home from './Components/Home/Home';
+import AddFlightData from "./Components/AddFlightData/AddFlightData";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./Components/Home/Home";
-import AdminBuses from "./Components/Admin/AdminBuses";
+import AdminFlights from "./Components/Admin/AdminFlights";
 import RouteForm from "./Components/RouteForm/RouteForm";
-import BusForm2 from "./Components/BusForm_2/BusForm";
+import FlightForm2 from "./Components/FlightForm_2/FlightForm";
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<BusForm />} />
-          <Route path="/ad" element={<AdminBuses />} />
+          <Route path="/addflightdata" element={<AddFlightData />} />
+          <Route path="/ad" element={<AdminFlights />} />
           <Route path="/route" element={<RouteForm />} />
-          <Route path="/bus" element={<BusForm2 />} />
+          <Route path="/flight" element={<FlightForm2 />} />
         </Routes>
       </Router>
     </>

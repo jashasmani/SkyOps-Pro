@@ -8,7 +8,6 @@ const flightsData = [
     flightNumber: "6E 6218",
     serviceClass: "Economy",
     price: "€4,974",
-    rewards: "Earn 245 6E Rewards",
     stops: "Non-stop",
   },
   {

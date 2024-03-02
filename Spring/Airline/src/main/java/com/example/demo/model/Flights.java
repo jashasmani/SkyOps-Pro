@@ -1,8 +1,6 @@
-package com.airline.user.model;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
-
-import java.sql.Time;
 
 
 @Entity
@@ -11,101 +9,152 @@ public class Flights {
 
     @Column
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private Time departureTime;
-    private String from;
-    private Time arrivalTime;
-    private String to;
-    private Time duration;
-    private String flightNumber;
-    private String stops;
-    private String serviceClass;
-    private int price;
+    private int id_flights;
+    @Column
+    private String departure_time;
+    @Column
+    private String arrival_time;
+    @Column
+    private String duration;
+    @Column
+    private String departure_airport;
+    @Column
+    private String arrival_airport;
+    @Column
+    private String flight_number;
+    @Column
+    private float business_class_seat;
+    @Column
+    private float economy_class_seat;
+    @Column
+    private float first_class_seat;
+    @Column
+    private float business_class_price;
+    @Column
+    private float economy_class_price;
+    @Column
+    private float first_class_price;
 
-
-    public Time getDepartureTime() {
-        return departureTime;
+    public int getId_flights() {
+        return id_flights;
     }
 
-    public void setDepartureTime(Time departureTime) {
-        this.departureTime = departureTime;
+    public void setId_flights(int id_flights) {
+        this.id_flights = id_flights;
     }
 
-    public String getFrom() {
-        return from;
+    public String getDeparture_time() {
+        return departure_time;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setDeparture_time(String departure_time) {
+        this.departure_time = departure_time;
     }
 
-    public Time getArrivalTime() {
-        return arrivalTime;
+    public String getArrival_time() {
+        return arrival_time;
     }
 
-    public void setArrivalTime(Time arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setArrival_time(String arrival_time) {
+        this.arrival_time = arrival_time;
     }
 
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public Time getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public String getFlightNumber() {
-        return flightNumber;
+    public String getDeparture_airport() {
+        return departure_airport;
     }
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
+    public void setDeparture_airport(String departure_airport) {
+        this.departure_airport = departure_airport;
     }
 
-    public String getStops() {
-        return stops;
+    public String getArrival_airport() {
+        return arrival_airport;
     }
 
-    public void setStops(String stops) {
-        this.stops = stops;
+    public void setArrival_airport(String arrival_airport) {
+        this.arrival_airport = arrival_airport;
     }
 
-    public String getServiceClass() {
-        return serviceClass;
+    public String getFlight_number() {
+        return flight_number;
     }
 
-    public void setServiceClass(String serviceClass) {
-        this.serviceClass = serviceClass;
+    public void setFlight_number(String flight_number) {
+        this.flight_number = flight_number;
     }
 
-    public int getPrice() {
-        return price;
+    public float getBusiness_class_seat() {
+        return business_class_seat;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setBusiness_class_seat(float business_class_seat) {
+        this.business_class_seat = business_class_seat;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public float getEconomy_class_seat() {
+        return economy_class_seat;
     }
 
-    public Long getId() {
-        return id;
+    public void setEconomy_class_seat(float economy_class_seat) {
+        this.economy_class_seat = economy_class_seat;
+    }
+
+    public float getFirst_class_seat() {
+        return first_class_seat;
+    }
+
+    public void setFirst_class_seat(float first_class_seat) {
+        this.first_class_seat = first_class_seat;
+    }
+
+    public float getBusiness_class_price() {
+        return business_class_price;
+    }
+
+    public void setBusiness_class_price(float business_class_price) {
+        this.business_class_price = business_class_price;
+    }
+
+    public float getEconomy_class_price() {
+        return economy_class_price;
+    }
+
+    public void setEconomy_class_price(float economy_class_price) {
+        this.economy_class_price = economy_class_price;
+    }
+
+    public float getFirst_class_price() {
+        return first_class_price;
+    }
+
+    public void setFirst_class_price(float first_class_price) {
+        this.first_class_price = first_class_price;
     }
 
     @Override
     public String toString() {
-        return "Flights{" + "id=" + id + ", departureTime=" + departureTime + ", from='" + from + '\'' + ", arrivalTime=" + arrivalTime + ", to='" + to + '\'' + ", duration=" + duration + ", flightNumber='" + flightNumber + '\'' + ", stops='" + stops + '\'' + ", serviceClass='" + serviceClass + '\'' + ", price=" + price + '}';
+        return "Flights{" +
+                "id_flights=" + id_flights +
+                ", departure_time='" + departure_time + '\'' +
+                ", arrival_time='" + arrival_time + '\'' +
+                ", duration='" + duration + '\'' +
+                ", departure_airport='" + departure_airport + '\'' +
+                ", arrival_airport='" + arrival_airport + '\'' +
+                ", flight_number='" + flight_number + '\'' +
+                ", business_class_seat=" + business_class_seat +
+                ", economy_class_seat=" + economy_class_seat +
+                ", first_class_seat=" + first_class_seat +
+                ", business_class_price=" + business_class_price +
+                ", economy_class_price=" + economy_class_price +
+                ", first_class_price=" + first_class_price +
+                '}';
     }
 }

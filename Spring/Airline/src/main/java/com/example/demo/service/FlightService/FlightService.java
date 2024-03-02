@@ -1,7 +1,8 @@
-package com.airline.user.service.FlightService;
+package com.example.demo.service.FlightService;
 
 
-import com.airline.user.model.Flights;
+import com.example.demo.model.Flights;
+
 import java.util.List;
 
 public interface FlightService {

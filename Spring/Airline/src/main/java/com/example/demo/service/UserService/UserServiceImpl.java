@@ -1,7 +1,8 @@
-package com.airline.user.service.UserService;
+package com.example.demo.service.UserService;
 
-import com.airline.user.dao.UserDAO.UserDAO;
-import com.airline.user.model.User;
+
+import com.example.demo.dao.UserDAO.UserDAO;
+import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
