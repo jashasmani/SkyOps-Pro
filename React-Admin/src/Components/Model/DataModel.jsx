@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import EditFlightData from "../EditFlightData/EditFlightData";
+import './C1.css'
 
-const DataModel = ({ flight }) => {
+const DataModel = ({ flight,style }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -23,9 +24,10 @@ const DataModel = ({ flight }) => {
     bgcolor: "white",
     borderRadius: "0.5rem",
     boxShadow: 24,
-    zIndex: 1,
+    zIndex: 999999,
   };
 
+  const mergedStyle = { ...defaultStyle, ...style };
 
   return (
     <React.Fragment>
@@ -37,8 +39,9 @@ const DataModel = ({ flight }) => {
         onClose={handleClose}
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
+        className="custom-modal" 
       >
-        <Box sx={defaultStyle}>
+        <Box sx={mergedStyle}>
           <EditFlightData flight={flight} close={setOpen}/>
           
         </Box>

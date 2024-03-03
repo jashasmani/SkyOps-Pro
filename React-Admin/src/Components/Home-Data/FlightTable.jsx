@@ -43,8 +43,7 @@ const FlightTable = () => {
               <th>Flight Number</th>
               <th colSpan="3">Seats</th>
               <th colSpan="3">Prices</th>
-              <th>Update</th>
-              <th>Delete</th>
+             
             </tr>
           </thead>
           <tbody className="text-center">
@@ -74,7 +73,7 @@ const FlightTable = () => {
                 <td className="align-middle">{flight.business_class_price}</td>
                 <td className="align-middle">{flight.economy_class_price}</td>
                 <td className="align-middle">{flight.first_class_price}</td>
-                <td className="align-middle">
+                {/* <td className="align-middle">
                   <Modal
                     flight={flight}
                     style={{ position: "absolute", zIndex: 999 }}
@@ -88,7 +87,7 @@ const FlightTable = () => {
                   >
                     Delete
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

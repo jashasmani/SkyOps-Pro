@@ -36,7 +36,7 @@ const EditFlightData = ({ flight, close }) => {
   const [economyClassPrice, setEconomyClassPrice] = useState(
     flight.economy_class_price
   );
-  const [duration, setDuration] = useState("0h 0min");
+  const [duration, setDuration] = useState(flight.duration);
 
   const handleUpadate = async (e) => {
     e.preventDefault();
@@ -60,6 +60,7 @@ const EditFlightData = ({ flight, close }) => {
         }
       );
       console.log(response.data);
+      close(false)
     } catch (e) {
       console.log(e);
     }
@@ -102,17 +103,15 @@ const EditFlightData = ({ flight, close }) => {
       if (
         departureTime &&
         arrivalTime &&
-        dayjs(departureTime).isValid() &&
-        dayjs(arrivalTime).isValid()
+        dayjs(departureTime, format).isValid() &&
+        dayjs(arrivalTime, format).isValid()
       ) {
         const departure = dayjs(departureTime, format);
         const arrival = dayjs(arrivalTime, format);
-        const durationHours = arrival.diff(departure, "hour");
-        const durationMinutes = arrival.diff(departure, "minute") % 60;
-        const durationString =
-          durationHours +
-          "h" +
-          (durationMinutes ? " " + durationMinutes + "min" : "");
+        const durationMinutes = arrival.diff(departure, "minute");
+        const durationHours = Math.floor(durationMinutes / 60);
+        const remainingMinutes = durationMinutes % 60;
+        const durationString = `${durationHours}h ${remainingMinutes}min`;
         setDuration(durationString);
       }
     };
@@ -192,12 +191,12 @@ const EditFlightData = ({ flight, close }) => {
                   defaultValue={dayjs(arrivalTime, format)}
                   format={format}
                   needConfirm={false}
-                  style={{ width: "100%" }}
+                  style={{ width: "100%", zIndex: 9999 }}
                 />
               </div>
               <div className="col-md-4 mb-3 mb-md-0">
                 <label className="form-label">Duration</label>
-                <p className="form-control">{flight.duration}</p>
+                <p className="form-control">{duration}</p>
               </div>
             </div>
             <div className="row mb-4">

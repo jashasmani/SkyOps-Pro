@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import ShowStatus from "../../../../React-User/src/Components/Status/ShowStatus";
+import ShowStatus from "../Status/ShowStatus";
 
 const DataModel = ({ price, style }) => {
   const [open, setOpen] = useState(false);
@@ -23,7 +23,7 @@ const DataModel = ({ price, style }) => {
     width: "35rem",
     bgcolor: "white",
     borderRadius: "0.5rem",
-    boxShadow: 24,
+    boxShadow: 24,  
     pt: 2,
     px: 4,
     pb: 3,

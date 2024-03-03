@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import airports from "../AirportNames/AirpostName.js";
 import dayjs from "dayjs";
-import { TimePicker } from "antd";
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
+import { TimePicker, DatePicker } from "antd";
+// import Alert from "@mui/material/Alert";
+// import Stack from "@mui/material/Stack";
 import "react-toastify/dist/ReactToastify.css";
 import { Container } from "react-bootstrap";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -74,30 +74,32 @@ const AddFlightData = () => {
   const onChange1 = (time, timeString) => {
     console.log(time, timeString);
     setDepatureTime(time);
-    calculateDuration();
   };
   const onChange2 = (time, timeString) => {
     console.log(time, timeString);
     setArrivalTime(time);
-    calculateDuration();
+  };
+
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
   };
   useEffect(() => {
+    const calculateDuration = () => {
+      if (departureTime && arrivalTime) {
+        const departure = dayjs(departureTime, format);
+        const arrival = dayjs(arrivalTime, format);
+        const durationHours = arrival.diff(departure, "hour");
+        const durationMinutes = arrival.diff(departure, "minute") % 60;
+        const durationString =
+          durationHours +
+          "h" +
+          (durationMinutes ? " " + durationMinutes + "min" : "");
+        setDuration(durationString);
+      }
+    };
     calculateDuration();
   }, [departureTime, arrivalTime]);
 
-  const calculateDuration = () => {
-    if (departureTime && arrivalTime) {
-      const departure = dayjs(departureTime, format);
-      const arrival = dayjs(arrivalTime, format);
-      const durationHours = arrival.diff(departure, "hour");
-      const durationMinutes = arrival.diff(departure, "minute") % 60;
-      const durationString =
-        durationHours +
-        "h" +
-        (durationMinutes ? " " + durationMinutes + "min" : "");
-      setDuration(durationString);
-    }
-  };
   return (
     <>
       {/* <div className="my-3 d-flex justify-content-center">
@@ -149,11 +151,12 @@ const AddFlightData = () => {
                   </select>
                 </div>
                 <div className="col-md-4 mb-3 mb-md-0">
-                  <label className="form-label">Flight Number</label>
-                  <input
-                    type="text"
-                    onChange={(e) => setFlightNumber(e.target.value)}
-                    className="form-control"
+                  <label className="form-label">Select Date</label>
+                 
+                  <DatePicker
+                    onChange={onChange}
+                    style={{ width: "100%" }}
+                    size="large"
                   />
                 </div>
               </div>
@@ -165,10 +168,11 @@ const AddFlightData = () => {
                   <TimePicker
                     onChange={onChange1}
                     changeOnScroll
-                    defaultValue={dayjs("12:08", format)}
+                    defaultValue={dayjs("12:00", format)}
                     format={format}
                     needConfirm={false}
                     style={{ width: "100%" }}
+                    size="large"
                   />
                 </div>
                 <div className="col-md-4 mb-3 mb-md-0">
@@ -176,10 +180,11 @@ const AddFlightData = () => {
                   <TimePicker
                     onChange={onChange2}
                     changeOnScroll
-                    defaultValue={dayjs("12:08", format)}
+                    defaultValue={dayjs("12:00", format)}
                     format={format}
                     needConfirm={false}
                     style={{ width: "100%" }}
+                    size="large"
                   />
                 </div>
                 <div className="col-md-4 mb-3 mb-md-0">
@@ -239,10 +244,20 @@ const AddFlightData = () => {
                   />
                 </div>
               </div>
-              <div className="d-flex justify-content-end mt-4">
-                <button type="submit" className="btn btn-primary ">
-                  Add Flight
-                </button>
+              <div className="row mb-4">
+                <div className="col-md-4 mb-3 mb-md-0">
+                  <label className="form-label">Flight Number</label>
+                  <input
+                    type="text"
+                    onChange={(e) => setFlightNumber(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+                <div className="d-flex justify-content-end mt-4">
+                  <button type="submit" className="btn btn-primary ">
+                    Add Flight
+                  </button>
+                </div>
               </div>
             </form>
           </div>

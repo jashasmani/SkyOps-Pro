@@ -4,10 +4,13 @@ package com.example.demo.contoller;
 import com.example.demo.model.Flights;
 import com.example.demo.service.FlightService.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @CrossOrigin(origins = "*")
@@ -22,6 +25,30 @@ public class FlightController {
     public List<Flights> get() {
         return flightService.get();
     }
+
+    @GetMapping("/flights/{departureAirport}/{arrivalAirport}/{departureTimeString}/{arrivalTimeString}")
+    public ResponseEntity<List<Flights>> getData(@PathVariable Map<String, String> map) {
+        String departureAirport = map.get("departureAirport");
+        String arrivalAirport = map.get("arrivalAirport");
+        String departureTimeString = map.get("departureTimeString");
+        String arrivalTimeString = map.get("arrivalTimeString");
+
+        List<Flights> allFlights = flightService.get();
+
+        List<Flights> filteredFlights = allFlights.stream()
+                .filter(flight -> flight.getDeparture_airport().equals(departureAirport))
+                .filter(flight -> flight.getArrival_airport().equals(arrivalAirport))
+                .filter(flight -> flight.getDeparture_time().equals(departureTimeString))
+                .filter(flight -> flight.getArrival_time().equals(arrivalTimeString))
+                .collect(Collectors.toList());
+
+        if (filteredFlights.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(filteredFlights, HttpStatus.OK);
+        }
+    }
+
 
     @PostMapping("/flights")
     public Flights save(@RequestBody Flights flights) {
