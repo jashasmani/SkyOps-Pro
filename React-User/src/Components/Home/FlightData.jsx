@@ -1,24 +1,24 @@
 import React from "react";
 import data from "./data.js";
 import { Container } from "react-bootstrap";
-import axios from "axios";
+// import axios from "axios";
 import DataModel from "../Model/DataModel.jsx";
 
 const FlightTable = () => {
   const flightsData = data;
 
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(
-        'http://localhost:8080/main/flights'
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log("Invalid Data");
-    }
-  };
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.get(
+  //       'http://localhost:8080/main/flights'
+  //     );
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.log("Invalid Data");
+  //   }
+  // };
 
   return (
     <Container className="bg-white rounded-4 my-5 ">
@@ -30,7 +30,6 @@ const FlightTable = () => {
               <th>Duration</th>
               <th>ATDT</th>
               <th>Flight Number</th>
-              <th>Stops</th>
               <th>Service Class</th>
               <th>Price (€)</th>
             </tr>
@@ -62,9 +61,7 @@ const FlightTable = () => {
                 <td className="align-middle" style={{ fontSize: "1rem" }}>
                   {flight.flightNumber}
                 </td>
-                <td className="align-middle" style={{ fontSize: "1rem" }}>
-                  {flight.stops}
-                </td>
+                
                 <td className="align-middle" style={{ fontSize: "1rem" }}>
                   {flight.serviceClass}
                 </td>

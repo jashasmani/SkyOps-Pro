@@ -24,15 +24,16 @@ public class FlightServiceImpl implements FlightService {
 
     @Transactional
     @Override
-    public Flights get(String flights) {
-        return flightDAO.get(flights);
+    public Flights get(int id) {
+        return flightDAO.get(id);
     }
 
 
     @Transactional
     @Override
-    public void save(Flights flights) {
+    public Flights save(Flights flights) {
         flightDAO.save(flights);
+        return flights;
     }
 
 

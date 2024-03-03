@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import ShowStatus from "../Status/ShowStatus";
+import ShowStatus from "../../../../React-User/src/Components/Status/ShowStatus";
 
 const DataModel = ({ price, style }) => {
   const [open, setOpen] = useState(false);

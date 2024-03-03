@@ -8,10 +8,9 @@ import java.util.List;
 public interface FlightService {
     List<Flights> get();
 
-    //    Flights get(int id);
-    Flights get(String flights);
+    Flights get(int id);
 
-    void save(Flights flights);
+    Flights save(Flights flights);
 
     void delete(int id);
 }

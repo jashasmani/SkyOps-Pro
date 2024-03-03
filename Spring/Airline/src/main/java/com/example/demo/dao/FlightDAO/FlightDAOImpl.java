@@ -25,9 +25,9 @@ public class FlightDAOImpl implements FlightDAO {
     }
 
     @Override
-    public Flights get(String flights) {
+    public Flights get(int id) {
         Session session = entityManager.unwrap(Session.class);
-        return session.get(Flights.class, flights);
+        return session.get(Flights.class, id);
     }
 
     @Override

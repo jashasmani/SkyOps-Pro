@@ -8,8 +8,7 @@ public interface FlightDAO {
 
     List<Flights> get();
 
-    //    User get(int id);
-    Flights get(String flights);
+    Flights get(int id);
 
     void save(Flights flights);
 

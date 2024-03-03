@@ -6,11 +6,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background: rgb(113, 154, 204);
+  background: rgb(140, 164, 193);
   background: linear-gradient(
-    0deg,
-    rgba(113, 154, 204, 1) 0%,
-    rgba(1, 8, 143, 1) 100%
+    4deg,
+    rgba(140, 164, 193, 1) 0%,
+    rgba(94, 111, 200, 1) 38%,
+    rgba(24, 4, 248, 1) 100%
   );
 }
 
