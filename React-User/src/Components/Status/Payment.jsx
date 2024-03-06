@@ -5,17 +5,17 @@ const Payment = () => {
   const [value, setValue] = useState();
   return (
     <>
-      <section className="d-flex justify-content-center">
+      <section className="d-flex justify-content-center flex-column">
+        <h5 className="text-black">Payment</h5>
         <div
           className="card  my-4"
           style={{
-            width: "85%",
-            background: "#01088f",
-            // background: "rgb(113,154,204) linear-gradient(180deg, rgba(113,154,204,1) 0%, rgba(1,8,143,1) 100%)",
+            width: "100%",
+            // background: "#01088f",
+            background: "rgb(113,154,204) linear-gradient(180deg, rgba(113,154,204,1) 0%, rgba(1,8,143,1) 100%)",
           }}
         >
           <div className="card-body">
-            <h5 className="text-light">Payment</h5>
             <form>
               <div className="d-flex justify-content-between align-items-center mb-1">
                 <div className="Data">

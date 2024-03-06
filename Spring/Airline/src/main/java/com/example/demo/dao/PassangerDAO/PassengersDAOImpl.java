@@ -1,7 +1,7 @@
-package com.example.demo.dao.UserDAO;
+package com.example.demo.dao.PassangerDAO;
 
 
-import com.example.demo.model.User;
+import com.example.demo.model.Passenger;
 import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -11,35 +11,35 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserDAOImpl implements UserDAO{
+public class PassengersDAOImpl implements PassengersDAO {
 
     @Autowired
     private EntityManager entityManager;
 
     @Override
-    public List<User> get() {
-        Session session=entityManager.unwrap(Session.class);
-       Query<User> query= session.createQuery("From User",User.class);
-     List<User> list=query.getResultList();
-     return list;
+    public List<Passenger> get() {
+        Session session = entityManager.unwrap(Session.class);
+        Query<Passenger> query = session.createQuery("From Passenger", Passenger.class);
+        List<Passenger> list = query.getResultList();
+        return list;
     }
 
     @Override
-    public User get(String email) {
-        Session session=entityManager.unwrap(Session.class);
-        return session.get(User.class,email);
+    public Passenger get(long id) {
+        Session session = entityManager.unwrap(Session.class);
+        return session.get(Passenger.class, id);
     }
 
     @Override
-    public void save(User user) {
-    Session session=entityManager.unwrap(Session.class);
-    session.saveOrUpdate(user);
+    public void save(Passenger passengers) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(passengers);
     }
 
     @Override
-    public void delete(int id) {
-        Session session=entityManager.unwrap(Session.class);
-        User user=session.get(User.class,id);
-        session.delete(user);
+    public void delete(long id) {
+        Session session = entityManager.unwrap(Session.class);
+        Passenger passengers = session.get(Passenger.class, id);
+        session.delete(passengers);
     }
 }

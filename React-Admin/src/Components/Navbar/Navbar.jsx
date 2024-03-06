@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 
-const NavBar = ({setShowAddFlight}) => {
+const NavBar = ({ setShowAddFlight, setShowAllFlight }) => {
   return (
     <Navbar bg="white" variant="light" expand="lg" collapseOnSelect={false}>
       <Navbar.Brand>
@@ -16,16 +16,22 @@ const NavBar = ({setShowAddFlight}) => {
       />
       <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
         <Nav className="ml-auto mx-2">
-          <Link to="/home" className="text-primary mx-2"  onClick={()=>{setShowAddFlight(false)}}>
+          <Link
+            to="/home"
+            className="text-primary mx-2"
+            onClick={() => {
+              setShowAddFlight(false);
+            }}
+          >
             Home
           </Link>
-          <Link className="text-primary mx-2"  onClick={()=>{setShowAddFlight(true)}}>
+          <Link className="text-primary mx-2" to="/addflightdata">
             Add Flight
           </Link>
-          <Link to="/destinations" className="text-primary mx-2">
-            Destinations
+          <Link to="/data" className="text-primary mx-2">
+            All Flights
           </Link>
-          <Link to="/signup" className="text-primary mx-2">
+          <Link to="/" className="text-primary mx-2">
             Log out
           </Link>
         </Nav>

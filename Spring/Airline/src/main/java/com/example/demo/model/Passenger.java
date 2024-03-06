@@ -2,16 +2,14 @@ package com.example.demo.model;
 
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "passengers")
-public class Passenger {
+public class Passenger{
 
-    @Column
+
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long pid;
+    private long id;
     @Column
     private String pname1;
     @Column
@@ -37,13 +35,6 @@ public class Passenger {
     @Column
     private int totalprice;
 
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
-
-    public Long getPid() {
-        return pid;
-    }
 
     public void setPname1(String pname1) {
         this.pname1 = pname1;
@@ -137,10 +128,18 @@ public class Passenger {
         this.totalprice = totalprice;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Passengers{" +
-                "pid=" + pid +
+                "pid=" + id +
                 ", pname1='" + pname1 + '\'' +
                 ", pname2='" + pname2 + '\'' +
                 ", pname3='" + pname3 + '\'' +

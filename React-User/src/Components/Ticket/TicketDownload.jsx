@@ -34,7 +34,7 @@ const TicketDownload = () => {
         imgWidth * ratio,
         imgHeight * ratio
       );
-      pdf.save("document.pdf");
+      pdf.save("Ticket.pdf");
     });
   };
 

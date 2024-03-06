@@ -23,6 +23,8 @@ public class Flights {
     @Column
     private String flight_number;
     @Column
+    private String date;
+    @Column
     private float business_class_seat;
     @Column
     private float economy_class_seat;
@@ -73,6 +75,14 @@ public class Flights {
 
     public void setDeparture_airport(String departure_airport) {
         this.departure_airport = departure_airport;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getArrival_airport() {

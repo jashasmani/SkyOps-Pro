@@ -1,122 +1,139 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import MultipleStopIcon from "@mui/icons-material/MultipleStop";
+import { Container, Row, Button } from "react-bootstrap"; // Importing Row and Col for grid layout
+import { TimePicker } from "antd";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import dayjs from "dayjs";
+import { DatePicker } from "antd";
+import axios from "axios";
 import airports from "../Airport/AirpostName.js";
+dayjs.extend(customParseFormat);
 
 const BookingForm = ({ setBooking }) => {
-  
-  const [departureCity, setDepartureCity] = useState("");
-  const [departureDate, setDepartureDate] = useState("");
-  const [selectedAirport, setSelectedAirport] = useState(null);
+  const format = "HH:mm";
 
-  const handleSubmit = (e) => {
+  const [departureAirport, setDepatureAirport] = useState("");
+  const [arrivalAirport, setArrivalAirport] = useState("");
+  const [dateFlight, setDateFlight] = useState("");
+  const [selectedRange, setSelectedRange] = useState([]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Booking information:", {
-      departureCity,
-      departureDate,
-    });
+
+    // const departureTimeString = dayjs(selectedRange[0]).format("HH:mm");
+    // const arrivalTimeString = dayjs(selectedRange[1]).format("HH:mm");
+    // const dateString = dayjs(dateFlight).format("DD-MM-YYYY");
+    // console.log(dateString);
+    // try {
+    //   const response = await axios.get(
+    //     `http://localhost:8080/main/flights/${departureAirport}/${arrivalAirport}/${dateString}/${departureTimeString}/${arrivalTimeString}`
+    //   );
+    //   console.log("123" + response.data);
+    // } catch (e) {
+    //   console.log(e);
+    // }
+
+    setBooking(true)
   };
 
-  const handleDepartureDateChange = (e) => {
-    setDepartureDate(e.target.value);
-  };
-
-  const handleAirportSelect = (event) => {
+  const handleDepatureAirport = (event) => {
     const selectedCode = event.target.value;
     const selectedAirport = airports.find(
       (airport) => airport.code === selectedCode
     );
-    setSelectedAirport(selectedAirport);
+    setDepatureAirport(selectedAirport.code);
+  };
+
+  const handleArrivalAirport = (event) => {
+    const selectedCode = event.target.value;
+    const selectedAirport = airports.find(
+      (airport) => airport.code === selectedCode
+    );
+    setArrivalAirport(selectedAirport.code);
+  };
+
+  const handleDate = (dates) => {
+    setDateFlight(dates);
+    // console.log(dayjs(dateFlight).format("DD-MM-YYYY"))
+  };
+
+  const handleRangeChange = (dates) => {
+    setSelectedRange(dates);
   };
 
   return (
-    <Container className="bg-white mt-5 rounded-4 ">
-      <Row >
-        <Col >
-          <h1 className="text-center p-2 mb-5 mt-5">Flight Booking</h1>
-          <Form
-            onSubmit={handleSubmit}
-            className="row d-flex justify-content-around g-3 mb-5 straight"
+    <>
+      <Container className="bg-white rounded-4 my-5">
+        <div>
+          <div
+            className="rounded p-4 p-md-5"
+            style={{ backgroundColor: "white" }}
           >
-            <div
-              className=" d-flex justify-content-around straight-2"
-              style={{ width: "25rem" }}
-            >
-              <Form.Group
-                className="mb-3 setWidth"
-                style={{ width: "12rem" }}
-                controlId="departureCity"
-              >
-                <Form.Select className="w-5 " onChange={handleAirportSelect}>
-                  <option value="">From</option>
+            <h1 className="pb-4 text-center"> Flight Booking </h1>
+            <Row className="justify-content-center">
+              <div className="col-md-3 mb-3 mb-md-0">
+                <label className="form-label">From</label>
+                <select
+                  className="form-select"
+                  onChange={handleDepatureAirport}
+                >
+                  <option value={departureAirport}>Departure</option>
                   {airports.map((airport, index) => (
                     <option key={index} value={airport.code}>
-                      {airport.city}, {airport.state}
+                      {airport.city}, {airport.state} - {airport.code} (
+                      {airport.airport_name})
                     </option>
                   ))}
-                </Form.Select>
-                
-              </Form.Group>
-              <MultipleStopIcon
-                className="mx-1 mb-3"
-                style={{ color: "black", fontSize: "2.5rem" }}
-              />
-              <Form.Group
-                className="mb-3 setWidth"
-                style={{ width: "12rem" }}
-                controlId="destCity"
-              >
-                <Form.Select onChange={handleAirportSelect}>
-                  <option value="">To</option>
+                </select>
+              </div>
+              <div className="col-md-3 mb-3 mb-md-0">
+                <label className="form-label">To</label>
+                <select className="form-select" onChange={handleArrivalAirport}>
+                  <option value={arrivalAirport}>Arrival</option>
                   {airports.map((airport, index) => (
                     <option key={index} value={airport.code}>
-                      {airport.city}, {airport.state}
+                      {airport.city}, {airport.state} - {airport.code} (
+                      {airport.airport_name})
                     </option>
                   ))}
-                </Form.Select>
-              </Form.Group>
-            </div>
-            <Form.Group
-              className="mb-3 setWidth"
-              style={{ width: "13rem" }}
-              controlId="departureDate"
-              label="date"
-            >
-             
-              <Form.Control
-                type="date"
-                name="date"
-                label="date"
-                onChange={handleDepartureDateChange}
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3 setWidth"
-              style={{ width: "13rem" }}
-              controlId="departureDate"
-              label="date"
-            >
-             
-              <Form.Control
-                type="date"
-                name="date"
-                label="date"
-                onChange={handleDepartureDateChange}
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-              className="btn btn-primary justify-content-center"
-              style={{ width: "6rem", height: "2.3rem" }}
-              onClick={() => setBooking(true)}
-            >
-              Flights
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+                </select>
+              </div>
+              <div className="col-md-3 mb-3 mb-md-0">
+                <label className="form-label">Select Date </label>
+                <DatePicker
+                  onChange={handleDate}
+                  style={{ width: "100%" }}
+                  size="large"
+                />
+              </div>
+
+              <div className="col-md-3 mb-3 mb-md-0">
+                <label className="form-label">Select Time</label>
+                <TimePicker.RangePicker
+                  onChange={handleRangeChange}
+                  changeOnScroll
+                  format={format}
+                  placeholder={["Departure ", "Arrival "]}
+                  needConfirm={false}
+                  style={{ width: "100%" }}
+                  size="large"
+                />
+              </div>
+              <div className="col-md-3 mb-3 mb-md-0 d-flex justify-content-end w-100 mt-4">
+                <Button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="btn btn-primary "
+                >
+                  Flight
+                </Button>
+              </div>
+            </Row>
+          </div>
+        </div>
+      </Container>
+      {/* <ShowSearchFlights searchFlights={searchFlights} permission={permission}/> */}
+    </>
   );
 };
 

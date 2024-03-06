@@ -17,8 +17,8 @@ const NavBar = () => {
           <Nav.Link as={Link} to="/plan" className="text-primary">
             Plan Fly
           </Nav.Link>
-          <Nav.Link as={Link} to="/destinations" className="text-primary">
-            Destinations
+          <Nav.Link as={Link} to="/allflights" className="text-primary">
+            All Flights
           </Nav.Link>
           <Nav.Link as={Link} to="/signup" className="text-primary">
             LOG IN

@@ -1,19 +1,17 @@
-package com.example.demo.dao.UserDAO;
+package com.example.demo.dao.PassangerDAO;
 
 
-
-import com.example.demo.model.User;
+import com.example.demo.model.Passenger;
 
 import java.util.List;
 
-public interface UserDAO {
+public interface PassengersDAO {
 
-    List<User> get();
+    List<Passenger> get();
 
-    //    User get(int id);
-    User get(String email);
+    Passenger get(long id);
 
-    void save(User user);
+    void save(Passenger passengers);
 
-    void delete(int id);
+    void delete(long id);
 }

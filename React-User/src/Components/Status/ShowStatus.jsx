@@ -12,9 +12,24 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 
+export const UserContext = React.createContext();
+
 const ShowStatus = ({ setOpen, price }) => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
+
+  <UserContext.Provider value={current}>
+    <Ticket/> 
+  </UserContext.Provider>
+
+  const next = () => {
+    setCurrent(current + 1);
+  };
+
+  const prev = () => {
+    setCurrent(current - 1);
+  };
+
   const steps = [
     {
       title: (
@@ -31,7 +46,7 @@ const ShowStatus = ({ setOpen, price }) => {
       ),
       status: "finish",
       icon: <AirlineSeatReclineNormalIcon />,
-      content: <Ticket price={price} />,
+      content: <Ticket price={price}  />,
     },
     {
       title: (
@@ -75,16 +90,6 @@ const ShowStatus = ({ setOpen, price }) => {
       content: <Done />,
     },
   ];
-  const next = () => {
-    setCurrent(current + 1);
-  };
-  const prev = () => {
-    setCurrent(current - 1);
-  };
-  //   const items = steps.map((item) => ({
-  //     key: item.title,
-  //     title:  <span >{item.title}</span>,
-  //   }));
 
   const contentStyle = {
     maxHeight: "400px",
@@ -105,7 +110,9 @@ const ShowStatus = ({ setOpen, price }) => {
             <button
               type="button"
               className="btn btn-primary me-2"
-              onClick={() => next()}
+              onClick={() => {
+                next();
+              }}
             >
               Next
             </button>
@@ -143,4 +150,5 @@ const ShowStatus = ({ setOpen, price }) => {
     </>
   );
 };
+
 export default ShowStatus;

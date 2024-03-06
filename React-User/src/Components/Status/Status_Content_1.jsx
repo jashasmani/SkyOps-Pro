@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 
-const Content = ({ keyProp }) => {
+const Content = ({ keyProp ,onNameChange, onAgeChange }) => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
 
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    const newName = e.target.value;
+    setName(newName);
+    onNameChange(keyProp, newName); 
   };
-
+  
   const handleAgeChange = (e) => {
-    setAge(e.target.value);
+    const newAge = e.target.value;
+    setAge(newAge);
+    onAgeChange(keyProp, newAge); 
   };
 
   return (
@@ -25,7 +29,7 @@ const Content = ({ keyProp }) => {
             type="text"
             className="form-control"
             placeholder="Name"
-            style={{ width: "10rem" }}
+            style={{ width: "14rem" }}
             value={name}
             onChange={handleNameChange}
             required

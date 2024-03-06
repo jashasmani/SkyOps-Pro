@@ -1,17 +1,17 @@
-package com.example.demo.service.UserService;
+package com.example.demo.service.PassengerService;
 
 
-import com.example.demo.model.User;
+import com.example.demo.model.Passenger;
 
 import java.util.List;
 
-public interface UserService {
-    List<User> get();
+public interface PassengerService {
+    List<Passenger> get();
 
     //    User get(int id);
-    User get(String email);
+    Passenger get(long id);
 
-    void save(User user);
+    void save(Passenger user);
 
-    void delete(int id);
+    void delete(long id);
 }

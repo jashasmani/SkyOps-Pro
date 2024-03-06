@@ -26,21 +26,24 @@ public class FlightController {
         return flightService.get();
     }
 
-    @GetMapping("/flights/{departureAirport}/{arrivalAirport}/{departureTimeString}/{arrivalTimeString}")
+    @GetMapping("/flights/{departureAirport}/{arrivalAirport}/{dateString}/{departureTimeString}/{arrivalTimeString}")
     public ResponseEntity<List<Flights>> getData(@PathVariable Map<String, String> map) {
         String departureAirport = map.get("departureAirport");
         String arrivalAirport = map.get("arrivalAirport");
+        String dateString = map.get("dateString");
         String departureTimeString = map.get("departureTimeString");
         String arrivalTimeString = map.get("arrivalTimeString");
 
         List<Flights> allFlights = flightService.get();
 
         List<Flights> filteredFlights = allFlights.stream()
-                .filter(flight -> flight.getDeparture_airport().equals(departureAirport))
-                .filter(flight -> flight.getArrival_airport().equals(arrivalAirport))
-                .filter(flight -> flight.getDeparture_time().equals(departureTimeString))
-                .filter(flight -> flight.getArrival_time().equals(arrivalTimeString))
+                .filter(flight -> departureAirport == null || flight.getDeparture_airport().equals(departureAirport))
+                .filter(flight -> arrivalAirport == null || flight.getArrival_airport().equals(arrivalAirport))
+                .filter(flight -> dateString == null || flight.getDate().equals(dateString))
+                .filter(flight -> departureTimeString == null || flight.getDeparture_time().equals(departureTimeString))
+                .filter(flight -> arrivalTimeString == null || flight.getArrival_time().equals(arrivalTimeString))
                 .collect(Collectors.toList());
+
 
         if (filteredFlights.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -64,6 +67,7 @@ public class FlightController {
             existingFlight.setDeparture_airport(flights.getDeparture_airport());
             existingFlight.setArrival_airport(flights.getArrival_airport());
             existingFlight.setFlight_number(flights.getFlight_number());
+            existingFlight.setDate(flights.getDate());
             existingFlight.setDeparture_time(flights.getDeparture_time());
             existingFlight.setArrival_time(flights.getArrival_time());
             existingFlight.setDuration(flights.getDuration());

@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 import airports from "../AirportNames/AirpostName.js";
 import dayjs from "dayjs";
 import { TimePicker, DatePicker } from "antd";
-// import Alert from "@mui/material/Alert";
-// import Stack from "@mui/material/Stack";
 import "react-toastify/dist/ReactToastify.css";
 import { Container } from "react-bootstrap";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
-const AddFlightData = () => {
+const AddFlightData = ({ showAddFlight }) => {
   const [flightNumber, setFlightNumber] = useState("");
   const [departureTime, setDepatureTime] = useState();
   const [arrivalTime, setArrivalTime] = useState();
+  const [dateFlight, setDateFlight] = useState("");
   const [departureAirport, setDepatureAirport] = useState("");
   const [arrivalAirport, setArrivalAirport] = useState("");
   const [businessClassSeat, setBusinessClassSeat] = useState("");
@@ -28,13 +29,17 @@ const AddFlightData = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const departureTimeString = departureTime.format("HH:mm");
-    const arrivalTimeString = arrivalTime.format("HH:mm");
+    // const departureTimeString = departureTime.format("HH:mm");
+    // const arrivalTimeString = arrivalTime.format("HH:mm");
+    const departureTimeString = dayjs(departureTime).format("HH:mm");
+    const arrivalTimeString = dayjs(arrivalTime).format("HH:mm");
+    const dateString = dayjs(dateFlight).format("DD-MM-YYYY");
     try {
       const response = await axios.post("http://localhost:8080/main/flights", {
         departure_airport: departureAirport,
         arrival_airport: arrivalAirport,
         flight_number: flightNumber,
+        date: dateString,
         departure_time: departureTimeString,
         arrival_time: arrivalTimeString,
         duration: duration,
@@ -80,28 +85,33 @@ const AddFlightData = () => {
     setArrivalTime(time);
   };
 
-  const onChange = (date, dateString) => {
-    console.log(date, dateString);
-  };
   useEffect(() => {
     const calculateDuration = () => {
-      if (departureTime && arrivalTime) {
+      if (
+        departureTime &&
+        arrivalTime &&
+        dayjs(departureTime, format).isValid() &&
+        dayjs(arrivalTime, format).isValid()
+      ) {
         const departure = dayjs(departureTime, format);
         const arrival = dayjs(arrivalTime, format);
-        const durationHours = arrival.diff(departure, "hour");
-        const durationMinutes = arrival.diff(departure, "minute") % 60;
-        const durationString =
-          durationHours +
-          "h" +
-          (durationMinutes ? " " + durationMinutes + "min" : "");
+        const durationMinutes = arrival.diff(departure, "minute");
+        const durationHours = Math.floor(durationMinutes / 60);
+        const remainingMinutes = durationMinutes % 60;
+        const durationString = `${durationHours}h ${remainingMinutes}min`;
         setDuration(durationString);
       }
     };
     calculateDuration();
   }, [departureTime, arrivalTime]);
 
+  const handleDate = (dates) => {
+    setDateFlight(dates);
+    // console.log(dayjs(dateFlight).format("DD-MM-YYYY"))
+  };
   return (
     <>
+      {!showAddFlight && <Navbar />}
       {/* <div className="my-3 d-flex justify-content-center">
         <Stack sx={{ width: "25%" }} spacing={2}>
           <Alert variant="filled" severity="success">
@@ -152,9 +162,8 @@ const AddFlightData = () => {
                 </div>
                 <div className="col-md-4 mb-3 mb-md-0">
                   <label className="form-label">Select Date</label>
-                 
                   <DatePicker
-                    onChange={onChange}
+                    onChange={handleDate}
                     style={{ width: "100%" }}
                     size="large"
                   />
@@ -263,6 +272,7 @@ const AddFlightData = () => {
           </div>
         </div>
       </Container>
+      <Footer />
     </>
   );
 };

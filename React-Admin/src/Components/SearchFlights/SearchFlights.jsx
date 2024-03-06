@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap"; // Importing Row and Col for grid layout
+import { Container, Row, Button } from "react-bootstrap"; // Importing Row and Col for grid layout
 import airports from "../AirportNames/AirpostName.js";
 import { TimePicker } from "antd";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -15,7 +15,8 @@ const SearchFlights = () => {
 
   const [departureAirport, setDepatureAirport] = useState("");
   const [arrivalAirport, setArrivalAirport] = useState("");
-  const [arrivalTime, setArrivalTime] = useState("");
+  const [dateFlight, setDateFlight] = useState(""); 
+  const [permission, setPermission] = useState(false); 
   const [searchFlights, setSearchFlights] = useState([]);
   const [selectedRange, setSelectedRange] = useState([]);
 
@@ -24,12 +25,15 @@ const SearchFlights = () => {
 
     const departureTimeString = dayjs(selectedRange[0]).format("HH:mm");
     const arrivalTimeString = dayjs(selectedRange[1]).format("HH:mm");
+    const dateString = dayjs(dateFlight).format("DD-MM-YYYY");
+    console.log(dateString)
     try {
       const response = await axios.get(
-        `http://localhost:8080/main/flights/${departureAirport}/${arrivalAirport}/${departureTimeString}/${arrivalTimeString}`
+        `http://localhost:8080/main/flights/${departureAirport}/${arrivalAirport}/${dateString}/${departureTimeString}/${arrivalTimeString}`
       );
-      console.log(response.data);
+      console.log('123'+response.data);
       setSearchFlights(response.data);
+      setPermission(true);
     } catch (e) {
       console.log(e);
     }
@@ -51,8 +55,9 @@ const SearchFlights = () => {
     setArrivalAirport(selectedAirport.code);
   };
 
-  const onChange = (date) => {
-    setArrivalTime(date);
+  const handleDate = (dates) => {
+    setDateFlight(dates);
+    // console.log(dayjs(dateFlight).format("DD-MM-YYYY"))
   };
 
   const handleRangeChange = (dates) => {
@@ -67,7 +72,7 @@ const SearchFlights = () => {
             className="rounded p-4 p-md-5"
             style={{ backgroundColor: "white" }}
           >
-            <h3 className="pb-4 text-center">Search Flight </h3>
+            <h1 className="pb-4 text-center">Search Flight </h1>
             <Row className="justify-content-center">
               <div className="col-md-3 mb-3 mb-md-0">
                 <label className="form-label">From</label>
@@ -99,22 +104,12 @@ const SearchFlights = () => {
               <div className="col-md-3 mb-3 mb-md-0">
                 <label className="form-label">Select Date </label>
                 <DatePicker
-                  onChange={onChange}
+                  onChange={handleDate}
                   style={{ width: "100%" }}
                   size="large"
                 />
               </div>
-              {/* <div className="col-md-3 mb-3 mb-md-0">
-              <label className="form-label">Departure Time</label>
-              <TimePicker
-                onChange={onChange1}
-                changeOnScroll
-                defaultValue={dayjs("12:00", format)}
-                format={format}
-                needConfirm={false}
-                style={{ width: "100%" }}
-              />
-            </div> */}
+
               <div className="col-md-3 mb-3 mb-md-0">
                 <label className="form-label">Select Time</label>
                 <TimePicker.RangePicker
@@ -126,7 +121,7 @@ const SearchFlights = () => {
                   style={{ width: "100%" }}
                   size="large"
                 />
-                ;
+                
               </div>
               <div className="col-md-3 mb-3 mb-md-0 d-flex justify-content-end w-100 mt-4">
                 <Button
@@ -141,7 +136,7 @@ const SearchFlights = () => {
           </div>
         </div>
       </Container>
-      {/* <ShowSearchFlights searchFlights={searchFlights}/> */}
+      <ShowSearchFlights searchFlights={searchFlights} permission={permission}/>
     </>
   );
 };
