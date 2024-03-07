@@ -4,7 +4,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import ShowStatus from "../Status/ShowStatus";
 
-const DataModel = ({ price, style }) => {
+const DataModel = ({ flight, style }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -35,7 +35,7 @@ const DataModel = ({ price, style }) => {
   return (
     <React.Fragment>
       <Button onClick={handleOpen} className="bg-success text-white">
-        {price}
+        {flight.price}
       </Button>
       <Modal
         open={open}
@@ -44,7 +44,7 @@ const DataModel = ({ price, style }) => {
         aria-describedby="child-modal-description"
       >
         <Box sx={mergedStyle}>
-          <ShowStatus setOpen={() => setOpen(false)} price={price} />
+          <ShowStatus setOpen={() => setOpen(false)} flight={flight}/>
         </Box>
       </Modal>
     </React.Fragment>

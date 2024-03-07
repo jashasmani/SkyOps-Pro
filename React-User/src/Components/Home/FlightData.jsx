@@ -1,7 +1,6 @@
 import React from "react";
 import data from "./data.js";
 import { Container } from "react-bootstrap";
-// import axios from "axios";
 import DataModel from "../Model/DataModel.jsx";
 
 const FlightTable = () => {
@@ -31,7 +30,7 @@ const FlightTable = () => {
               <th>ATDT</th>
               <th>Flight Number</th>
               <th>Service Class</th>
-              <th>Price (€)</th>
+              <th>Price </th>
             </tr>
           </thead>
           <tbody className="text-center">
@@ -68,7 +67,7 @@ const FlightTable = () => {
                 <td className="align-middle">
                   {/* <button type="button" className="btn btn-success"> */}
                   <DataModel
-                    price={flight.price}
+                    flight={flight}
                     style={{ position: "absolute", zIndex: 99 }}
                   />
 

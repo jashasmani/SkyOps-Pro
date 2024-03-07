@@ -1,19 +1,23 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import SelectPerson from "../Dropdown/SelectPerson";
 import SelectCategory from "../Dropdown/SelectCategory";
 // import SelectAgeCategory from "../Dropdown/SelectAgeCategory";
 import StatusContent1 from "./Status_Content_1";
-import { UserContext } from "./ShowStatus";
-import axios from "axios";
 
-const Status1 = ({ price }) => {
+const Status1 = ({
+  price,
+  setNameProps,
+  setAgeProps,
+  setEmailProps,
+  setContactProps,
+  setCategoryprops,
+}) => {
   const [selectedValue, setSelectedValue] = useState(1);
   const [names, setNames] = useState([]);
   const [ages, setAges] = useState([]);
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
-  const [category, setCategory] = useState("");
-  const user = useContext(UserContext);
+  // const [category, setCategory] = useState("");
 
   const handleSelect = (value) => {
     setSelectedValue(value);
@@ -24,6 +28,7 @@ const Status1 = ({ price }) => {
       const newNames = [...prevNames];
       newNames[index] = newName;
       // console.log(names);
+      setNameProps(newNames);
       return newNames;
     });
   };
@@ -33,6 +38,7 @@ const Status1 = ({ price }) => {
       const newAges = [...prevAges];
       newAges[index] = newAge;
       // console.log(ages);
+      setAgeProps(newAges);
       return newAges;
     });
   };
@@ -50,26 +56,6 @@ const Status1 = ({ price }) => {
     }
     return statusContent;
   };
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log(user);
-        if (user === 1) {
-          console.log("12", category, ages);
-
-          // const response = await axios.get(
-          //   `http://localhost:8080/api/user/${names}/${ages}/${email}/${contact}/${category}`
-          // );
-          // console.log(response.data);
-          // setNext1(false);
-        }
-      } catch (error) {
-        console.log("Invalid Data");
-      }
-    };
-    fetchData();
-  }, [user]);
 
   return (
     <>
@@ -107,7 +93,10 @@ const Status1 = ({ price }) => {
                     className="form-control "
                     placeholder="em@il.."
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setEmailProps(e.target.value);
+                    }}
                   />
                   <span className="input-group-text" id="basic-addon2">
                     @google.com
@@ -122,12 +111,15 @@ const Status1 = ({ price }) => {
                     className="form-control"
                     placeholder="Contact"
                     value={contact}
-                    onChange={(e) => setContact(e.target.value)}
+                    onChange={(e) => {
+                      setContact(e.target.value);
+                      setContactProps(e.target.value);
+                    }}
                   />
                 </div>
               </div>
               <div className="d-flex flex-row-reverse align-middle my-2 me-0 ">
-                <SelectCategory setItem={setCategory} />
+                <SelectCategory setItem={setCategoryprops} />
 
                 {/* <SelectAgeCategory /> */}
               </div>

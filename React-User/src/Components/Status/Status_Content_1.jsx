@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 
-const Content = ({ keyProp ,onNameChange, onAgeChange }) => {
+const Content = ({ keyProp, onNameChange, onAgeChange }) => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
 
   const handleNameChange = (e) => {
     const newName = e.target.value;
     setName(newName);
-    onNameChange(keyProp, newName); 
+    onNameChange(keyProp, newName);
   };
-  
+
   const handleAgeChange = (e) => {
     const newAge = e.target.value;
     setAge(newAge);
-    onAgeChange(keyProp, newAge); 
+    onAgeChange(keyProp, newAge);
   };
+
+ 
 
   return (
     <>

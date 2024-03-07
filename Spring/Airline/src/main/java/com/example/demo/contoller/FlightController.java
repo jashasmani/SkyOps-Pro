@@ -26,7 +26,7 @@ public class FlightController {
         return flightService.get();
     }
 
-    @GetMapping("/flights/{departureAirport}/{arrivalAirport}/{dateString}/{departureTimeString}/{arrivalTimeString}")
+    @GetMapping("/flights/{departureAirport}/{arrivalAirport}/{dateString}")
     public ResponseEntity<List<Flights>> getData(@PathVariable Map<String, String> map) {
         String departureAirport = map.get("departureAirport");
         String arrivalAirport = map.get("arrivalAirport");
@@ -39,9 +39,7 @@ public class FlightController {
         List<Flights> filteredFlights = allFlights.stream()
                 .filter(flight -> departureAirport == null || flight.getDeparture_airport().equals(departureAirport))
                 .filter(flight -> arrivalAirport == null || flight.getArrival_airport().equals(arrivalAirport))
-                .filter(flight -> dateString == null || flight.getDate().equals(dateString))
-                .filter(flight -> departureTimeString == null || flight.getDeparture_time().equals(departureTimeString))
-                .filter(flight -> arrivalTimeString == null || flight.getArrival_time().equals(arrivalTimeString))
+                .filter(flight -> dateString == null || dateString.equals("Invalid Date") || flight.getDate().equals(dateString))
                 .collect(Collectors.toList());
 
 

@@ -1,42 +1,46 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
-const flightsData = [
-  {
-    name: "Jash Asmani",
-    age: 21,
-    category: "Bus",
-    price: 4500,
-  },
-    {
-      name: "Riya Jivani",
-      age: 21,
-      category: "Bus",
-      price: 4500,
-    },
-    {
-      name: "Nirj Naist",
-      age: 21,
-      category: "Bus",
-      price: 4500,
-    },
-    {
-      name: "Prit Dholariya",
-      age: 21,
-      category: "Bus",
-      price: 4500,
-    },
-];
+// const flightsData = [
+//   {
+//     name: "Jash Asmani",
+//     age: 21,
+//     category: "Bus",
+//     price: 4500,
+//   },
+//   {
+//     name: "Riya Jivani",
+//     age: 21,
+//     category: "Bus",
+//     price: 4500,
+//   },
+//   {
+//     name: "Nirj Naist",
+//     age: 21,
+//     category: "Bus",
+//     price: 4500,
+//   },
+//   {
+//     name: "Prit Dholariya",
+//     age: 21,
+//     category: "Bus",
+//     price: 4500,
+//   },
+// ];
 
-const Verifcation = () => {
+const Verifcation = ({ allData }) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const calculateTotalPrice = () => {
-    let total = 0;
-    flightsData.forEach((flight) => {
-      total += flight.price;
-    });
-    setTotalPrice(total);
+    if (allData.pname4 !== null) {
+      setTotalPrice(allData.totalprice * 4);
+    } else if (allData.pname3 !== null) {
+      setTotalPrice(allData.totalprice * 3);
+    } else if (allData.pname2 !== null) {
+      setTotalPrice(allData.totalprice * 2);
+    } else if (allData.pname1 !== null) {
+      setTotalPrice(allData.totalprice * 1);
+    }
   };
   useState(() => {
     calculateTotalPrice();
@@ -54,14 +58,42 @@ const Verifcation = () => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {flightsData.map((flight) => (
-              <tr key={flight.flightNumber}>
-                <td>{flight.name}</td>
-                <td>{flight.age}</td>
-                <td>{flight.category}</td>
-                <td>{flight.price}</td>
+            <tr>
+              <td>{allData.pname1}</td>
+              <td>{allData.page1}</td>
+              <td>{allData.pcategory}</td>
+              <td>{allData.totalprice}</td>
+            </tr>
+            {allData.pname2 !== null ? (
+              <tr>
+                <td>{allData.pname2}</td>
+                <td>{allData.page2}</td>
+                <td>{allData.pcategory}</td>
+                <td>{allData.totalprice}</td>
               </tr>
-            ))}
+            ) : (
+              ""
+            )}
+            {allData.pname3 !== null ? (
+              <tr>
+                <td>{allData.pname3}</td>
+                <td>{allData.page3}</td>
+                <td>{allData.pcategory}</td>
+                <td>{allData.totalprice}</td>
+              </tr>
+            ) : (
+              ""
+            )}
+            {allData.pname4 !== null ? (
+              <tr>
+                <td>{allData.pname4}</td>
+                <td>{allData.page4}</td>
+                <td>{allData.pcategory}</td>
+                <td>{allData.totalprice}</td>
+              </tr>
+            ) : (
+              ""
+            )}
           </tbody>
         </table>
       </div>

@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "passengers")
-public class Passenger{
+public class Passenger {
 
 
+    @Column
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
     private String pname1;
@@ -35,6 +37,18 @@ public class Passenger{
     @Column
     private int totalprice;
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getPname1() {
+        return pname1;
+    }
 
     public void setPname1(String pname1) {
         this.pname1 = pname1;
@@ -128,18 +142,10 @@ public class Passenger{
         this.totalprice = totalprice;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
-        return "Passengers{" +
-                "pid=" + id +
+        return "Passenger{" +
+                "id=" + id +
                 ", pname1='" + pname1 + '\'' +
                 ", pname2='" + pname2 + '\'' +
                 ", pname3='" + pname3 + '\'' +
@@ -154,6 +160,4 @@ public class Passenger{
                 ", totalprice=" + totalprice +
                 '}';
     }
-
-
 }

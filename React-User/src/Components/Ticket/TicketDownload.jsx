@@ -2,8 +2,13 @@ import React, { useRef } from "react";
 import "./Ticket.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { useSelector } from "react-redux";
 
 const TicketDownload = () => {
+
+  // const flightdata = useSelector((state) => state.pagesManage.flightdata);
+
+
   const passengers = [
     { id: 1, name: "Makwana/Brijesh Mr (ADT)", ticketNumber: "L6T5SF" },
     { id: 2, name: "Parmar / Trushar Mr (ADT)", ticketNumber: "L6T5SF" },

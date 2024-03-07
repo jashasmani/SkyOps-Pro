@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Menu, Space, Typography } from "antd";
 
@@ -17,17 +17,29 @@ const items = [
   },
 ];
 
-const SelectCategory = ({setItem}) => {
+
+const SelectCategory = ({ setItem }) => {
+  const [defaultItem, setDefaultItem] = useState(null);
+  
+  const [defaultItemKey,setDefaultItemKey]=useState(2) ; // Set the default item key here
+  useEffect(() => {
+    const defaultMenuItem = items.find((item) => item.key === defaultItemKey);
+    if (defaultMenuItem) {
+      setDefaultItem(defaultMenuItem);
+      setItem(defaultMenuItem.label); // Set the default item label
+    }
+  }, [setItem,defaultItemKey]);
 
   const handleMenuClick = (e) => {
     const selectedItem = items.find((item) => item.key === e.key);
     if (selectedItem) {
-      setItem(selectedItem.label)
+      setItem(selectedItem.label);
+      setDefaultItemKey(selectedItem.key)
     }
   };
 
   const menu = (
-    <Menu onClick={handleMenuClick}>
+    <Menu onClick={handleMenuClick} selectedKeys={[defaultItemKey]}>
       {items.map((item) => (
         <Menu.Item key={item.key}>{item.label}</Menu.Item>
       ))}
@@ -39,6 +51,7 @@ const SelectCategory = ({setItem}) => {
       <Typography.Link
         className="d-flex align-middle ms-3"
         style={{ width: "6rem" }}
+        onClick={(e) => e.preventDefault()}
       >
         <Space>
           <h6 className="mb-0">Category</h6>

@@ -20,20 +20,20 @@ const BookingForm = ({ setBooking }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const departureTimeString = dayjs(selectedRange[0]).format("HH:mm");
-    // const arrivalTimeString = dayjs(selectedRange[1]).format("HH:mm");
-    // const dateString = dayjs(dateFlight).format("DD-MM-YYYY");
-    // console.log(dateString);
-    // try {
-    //   const response = await axios.get(
-    //     `http://localhost:8080/main/flights/${departureAirport}/${arrivalAirport}/${dateString}/${departureTimeString}/${arrivalTimeString}`
-    //   );
-    //   console.log("123" + response.data);
-    // } catch (e) {
-    //   console.log(e);
-    // }
+    const departureTimeString = dayjs(selectedRange[0]).format("HH:mm");
+    const arrivalTimeString = dayjs(selectedRange[1]).format("HH:mm");
+    const dateString = dayjs(dateFlight).format("YYYY-MM-DD");
+    console.log(dateString);
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/main/flights/${departureAirport}/${arrivalAirport}/${dateString}`
+      );
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
 
-    setBooking(true)
+    setBooking(true);
   };
 
   const handleDepatureAirport = (event) => {
@@ -107,8 +107,8 @@ const BookingForm = ({ setBooking }) => {
                 />
               </div>
 
-              <div className="col-md-3 mb-3 mb-md-0">
-                <label className="form-label">Select Time</label>
+              <div className="col-md-3 mb-3 mb-md-0 d-flex justify-content-center align-items-end pb-1" >
+                {/* <label className="form-label">Select Time</label>
                 <TimePicker.RangePicker
                   onChange={handleRangeChange}
                   changeOnScroll
@@ -117,9 +117,7 @@ const BookingForm = ({ setBooking }) => {
                   needConfirm={false}
                   style={{ width: "100%" }}
                   size="large"
-                />
-              </div>
-              <div className="col-md-3 mb-3 mb-md-0 d-flex justify-content-end w-100 mt-4">
+                /> */}
                 <Button
                   type="submit"
                   onClick={handleSubmit}
@@ -128,6 +126,15 @@ const BookingForm = ({ setBooking }) => {
                   Flight
                 </Button>
               </div>
+              {/* <div className="col-md-3 mb-3 mb-md-0 d-flex justify-content-end w-100 mt-4">
+                <Button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="btn btn-primary "
+                >
+                  Flight
+                </Button>
+              </div> */}
             </Row>
           </div>
         </div>
