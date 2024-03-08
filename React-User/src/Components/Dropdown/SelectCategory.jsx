@@ -5,11 +5,11 @@ import { Dropdown, Menu, Space, Typography } from "antd";
 const items = [
   {
     key: "1",
-    label: "Business Class",
+    label: "First Economy",
   },
   {
     key: "2",
-    label: "Premium Economy",
+    label: "Business Class",
   },
   {
     key: "3",
@@ -18,15 +18,16 @@ const items = [
 ];
 
 
-const SelectCategory = ({ setItem }) => {
-  const [defaultItem, setDefaultItem] = useState(null);
+const SelectCategory = ({ setItem,setItem2 }) => {
+  const [defaultItem, setDefaultItem] = useState('2');
   
-  const [defaultItemKey,setDefaultItemKey]=useState(2) ; // Set the default item key here
+  const [defaultItemKey,setDefaultItemKey]=useState('2') ; // Set the default item key here
   useEffect(() => {
     const defaultMenuItem = items.find((item) => item.key === defaultItemKey);
     if (defaultMenuItem) {
       setDefaultItem(defaultMenuItem);
-      setItem(defaultMenuItem.label); // Set the default item label
+      setItem(defaultMenuItem.label);
+      setItem2(defaultMenuItem.label);
     }
   }, [setItem,defaultItemKey]);
 
@@ -34,6 +35,7 @@ const SelectCategory = ({ setItem }) => {
     const selectedItem = items.find((item) => item.key === e.key);
     if (selectedItem) {
       setItem(selectedItem.label);
+      setItem2(selectedItem.label);
       setDefaultItemKey(selectedItem.key)
     }
   };

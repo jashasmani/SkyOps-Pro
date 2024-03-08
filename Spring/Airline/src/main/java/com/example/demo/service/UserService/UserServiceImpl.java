@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User get(String email) {
-        return userDAO.get(email);
+    public User get(int id) {
+        return userDAO.get(id);
     }
 
 

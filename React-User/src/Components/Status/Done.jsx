@@ -1,19 +1,32 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Result } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { alldata,flightdata } from "../../Store/API/action";
+import { useDispatch } from "react-redux";
+import { Alldata } from "../../Store/API/action";
+import {connect} from 'react-redux';
 
 export const MyContext = React.createContext("default");
 
-const Done = ({ allData ,flight}) => {
+const mapStateToProps = (state) => ({
+  state: state.alldata,  // Assuming 'user' is a top-level property in your state
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  Alldata: (personinfo) => dispatch(Alldata(personinfo)),
+});
+
+
+const Done = ({ state,Alldata}) => {
   const navigate = useNavigate();
 
-  const dispatch=useDispatch();
+  // const dispatch=useDispatch();
   const handleButtonClick = () => {
-    navigate("/ticket");
-    dispatch(alldata(allData,flight))
+    // navigate("/ticket");
+    console.log(state)
+    Alldata(state)
   };
+
+
   return (
     <div>
       <Result
@@ -31,4 +44,4 @@ const Done = ({ allData ,flight}) => {
   );
 };
 
-export default Done;
+export default connect(mapStateToProps,mapDispatchToProps)(Done);

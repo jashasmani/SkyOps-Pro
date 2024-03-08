@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import MultipleStopIcon from "@mui/icons-material/MultipleStop";
-import { Container, Row, Button } from "react-bootstrap"; // Importing Row and Col for grid layout
-import { TimePicker } from "antd";
+import { Container, Row, Button } from "react-bootstrap";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import dayjs from "dayjs";
 import { DatePicker } from "antd";
 import axios from "axios";
 import airports from "../Airport/AirpostName.js";
+import FlightData from "./FlightData";
 dayjs.extend(customParseFormat);
 
-const BookingForm = ({ setBooking }) => {
-  const format = "HH:mm";
-
+const BookingForm = () => {
+  const [booking, setBooking] = useState(false);
+  const [searchdata, setSearchData] = useState();
   const [departureAirport, setDepatureAirport] = useState("");
   const [arrivalAirport, setArrivalAirport] = useState("");
   const [dateFlight, setDateFlight] = useState("");
@@ -20,8 +19,8 @@ const BookingForm = ({ setBooking }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const departureTimeString = dayjs(selectedRange[0]).format("HH:mm");
-    const arrivalTimeString = dayjs(selectedRange[1]).format("HH:mm");
+    // const departureTimeString = dayjs(selectedRange[0]).format("HH:mm");
+    // const arrivalTimeString = dayjs(selectedRange[1]).format("HH:mm");
     const dateString = dayjs(dateFlight).format("YYYY-MM-DD");
     console.log(dateString);
     try {
@@ -29,6 +28,7 @@ const BookingForm = ({ setBooking }) => {
         `http://localhost:8080/main/flights/${departureAirport}/${arrivalAirport}/${dateString}`
       );
       console.log(response.data);
+      setSearchData(response.data);
     } catch (e) {
       console.log(e);
     }
@@ -107,7 +107,7 @@ const BookingForm = ({ setBooking }) => {
                 />
               </div>
 
-              <div className="col-md-3 mb-3 mb-md-0 d-flex justify-content-center align-items-end pb-1" >
+              <div className="col-md-3 mb-3 mb-md-0 d-flex justify-content-center align-items-end pb-1">
                 {/* <label className="form-label">Select Time</label>
                 <TimePicker.RangePicker
                   onChange={handleRangeChange}
@@ -139,6 +139,7 @@ const BookingForm = ({ setBooking }) => {
           </div>
         </div>
       </Container>
+      {booking && <FlightData searchdata={searchdata} />}
       {/* <ShowSearchFlights searchFlights={searchFlights} permission={permission}/> */}
     </>
   );

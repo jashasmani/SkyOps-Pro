@@ -8,8 +8,7 @@ import java.util.List;
 public interface UserService {
     List<User> get();
 
-    //    User get(int id);
-    User get(String email);
+    User get(int id);
 
     void save(User user);
 

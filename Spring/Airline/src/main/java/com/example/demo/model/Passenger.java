@@ -3,10 +3,11 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "passengers")
 public class Passenger {
-
 
     @Column
     @Id
@@ -37,6 +38,32 @@ public class Passenger {
     @Column
     private int totalprice;
 
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER    )
+    @JoinColumn(name = "User_FK")
+    private User passengeruser;
+
+    public User getPassengeruser() {
+        return passengeruser;
+    }
+
+    public void setPassengeruser(User passengeruser) {
+        this.passengeruser = passengeruser;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "JOIN_Passengers_Flights",
+            joinColumns = {@JoinColumn(name = "Passengers_ID_FK")},
+            inverseJoinColumns = {@JoinColumn(name = "Flights_ID_FK")})
+    private Set<Flights> flightsSet;
+
+
+    public Set<Flights> getFlightsSet() {
+        return flightsSet;
+    }
+
+    public void setFlightsSet(Set<Flights> flightsSet) {
+        this.flightsSet = flightsSet;
+    }
 
     public long getId() {
         return id;

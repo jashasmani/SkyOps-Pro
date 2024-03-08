@@ -35,7 +35,7 @@ const DataModel = ({ flight, style }) => {
   return (
     <React.Fragment>
       <Button onClick={handleOpen} className="bg-success text-white">
-        {flight.price}
+        {"Book"}
       </Button>
       <Modal
         open={open}

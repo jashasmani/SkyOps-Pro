@@ -1,2 +1,5 @@
-package com.example.demo.model;public class Join {
+package com.example.demo.model;
+
+public class Join {
+
 }

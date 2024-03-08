@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { message, Steps, theme } from "antd";
 import Ticket from "./Ticket";
 import Verifcation from "./Verifcation";
@@ -12,8 +12,7 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 import axios from "axios";
-
-export const UserContext = React.createContext();
+import { UserContext } from "../Home/Home";
 
 const ShowStatus = ({ setOpen, flight }) => {
   const { token } = theme.useToken();
@@ -23,14 +22,20 @@ const ShowStatus = ({ setOpen, flight }) => {
   const [categoryprops, setCategoryprops] = useState();
   const [emailProps, setEmailProps] = useState();
   const [contactProps, setContactProps] = useState();
+  const [priceProps, setPriceProps] = useState();
   const [allData, setAllData] = useState([]);
+  const [count, setCount] = useState(0);
+  const [id] = useState(localStorage.getItem('id'));
+  // const user = useRef();
 
   const next = () => {
     setCurrent(current + 1);
 
     const fetchData = async () => {
+      console.log(id);
       try {
         const postData = {
+          user_fk: id,
           pname1: nameProps[0],
           pname2: nameProps[1],
           pname3: nameProps[2],
@@ -42,20 +47,21 @@ const ShowStatus = ({ setOpen, flight }) => {
           pemail: emailProps,
           pcontact: contactProps,
           pcategory: categoryprops,
-          totalprice: flight.price,
+          totalprice: priceProps,
         };
 
         axios
-          .post("http://localhost:8080/ticket/passenger", postData)
+          .post(`http://localhost:8080/ticket/passenger/${id}`, postData)
           .then((response) => {
             console.log(response.data);
-            setAllData(response.data)
+            setAllData(response.data);
           });
+        setCount(1);
       } catch (error) {
         console.log("Invalid Data");
       }
     };
-    if (current === 0) {
+    if (current === 0 && count === 0) {
       fetchData();
     }
   };
@@ -82,12 +88,13 @@ const ShowStatus = ({ setOpen, flight }) => {
       icon: <AirlineSeatReclineNormalIcon />,
       content: (
         <Ticket
-          price={flight.price}
+          flight={flight}
           setNameProps={setNameProps}
           setAgeProps={setAgeProps}
           setEmailProps={setEmailProps}
           setContactProps={setContactProps}
           setCategoryprops={setCategoryprops}
+          setPriceProps={setPriceProps}
         />
       ),
     },
@@ -106,7 +113,7 @@ const ShowStatus = ({ setOpen, flight }) => {
       ),
       status: current <= 0 ? "wait" : "finish",
       icon: <SolutionOutlined />,
-      content: <Verifcation allData={allData}/>,
+      content: <Verifcation allData={allData} />,
     },
     {
       title: (
@@ -130,7 +137,7 @@ const ShowStatus = ({ setOpen, flight }) => {
       title: "Done",
       status: current <= 2 ? "wait" : "finish",
       icon: <SmileOutlined />,
-      content: <Done  allData={allData} flight={flight} />,
+      content: <Done allData={allData} flight={flight} />,
     },
   ];
 
@@ -140,11 +147,6 @@ const ShowStatus = ({ setOpen, flight }) => {
     color: token.colorTextTertiary,
     marginTop: 16,
   };
-
-  // useEffect(() => {
-
-  //   fetchData();
-  // }, [next]);
 
   return (
     <>

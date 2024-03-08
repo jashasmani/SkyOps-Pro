@@ -25,7 +25,18 @@ public class PassengersDAOImpl implements PassengersDAO {
     }
 
     @Override
-    public Passenger get(long id) {
+    public List<Passenger> getByUserId(int id) {
+        Session session = entityManager.unwrap(Session.class);
+        Query<Passenger> query = session.createQuery("FROM Passenger WHERE passengeruser.id = :id", Passenger.class);
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
+
+
+
+
+    @Override
+    public Passenger get(int id) {
         Session session = entityManager.unwrap(Session.class);
         return session.get(Passenger.class, id);
     }

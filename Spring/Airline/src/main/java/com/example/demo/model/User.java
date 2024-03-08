@@ -2,26 +2,26 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
     @Column
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Id
     @Column
     private String email;
 
-//    @Id
     @Column(name = "contact")
     private int contactme;
 
-//    @Id
     @Column(name = "userpassword")
     private String password;
+
 
     public int getId() {
         return id;

@@ -1,6 +1,6 @@
 import { ALLDATA} from "./actionTypes";
 
-export const alldata = (alldata,flightdata) => ({
+export const Alldata = (alldata) => ({
   type: ALLDATA,
-  payload: {alldata,flightdata},
+  payload: {alldata},
 });

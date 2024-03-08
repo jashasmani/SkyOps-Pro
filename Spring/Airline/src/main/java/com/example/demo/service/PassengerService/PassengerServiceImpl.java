@@ -23,10 +23,16 @@ public class PassengerServiceImpl implements PassengerService {
         return passengersDAO.get();
     }
 
+    @Transactional
+    @Override
+    public List<Passenger> getUserById(int id) {
+        return passengersDAO.getByUserId(id);
+    }
+
 
     @Transactional
     @Override
-    public Passenger get(long id) {
+    public Passenger get(int id) {
         return passengersDAO.get(id);
     }
 

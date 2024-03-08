@@ -1,13 +1,22 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Ticket.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { useSelector } from "react-redux";
+import { connect} from "react-redux";
 
-const TicketDownload = () => {
 
+const mapStateToProps = (state) => {
+  return {
+    alldata: state.state,
+  };
+};
+
+const TicketDownload = ({ alldata }) => {
   // const flightdata = useSelector((state) => state.pagesManage.flightdata);
-
+  // const passangerdata = useSelector((state) => state.pagesManage);
+  const [confirmationId, SetConfirmationId] = useState(123456789);
+  const [userDate, SetUserDate] = useState();
+  const [personinfo,setpersoninfo]=useState("");
 
   const passengers = [
     { id: 1, name: "Makwana/Brijesh Mr (ADT)", ticketNumber: "L6T5SF" },
@@ -22,7 +31,7 @@ const TicketDownload = () => {
     const input = pdfRef.current;
 
     html2canvas(input).then((canvas) => {
-      const pdf = new jsPDF("l", "mm", "a4", true);
+      const pdf = new jsPDF("p", "mm", "a4", true);
       const imgData = canvas.toDataURL("img/png");
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
@@ -42,11 +51,44 @@ const TicketDownload = () => {
       pdf.save("Ticket.pdf");
     });
   };
+  useEffect(() => {
+    function generateConfirmationId(length) {
+      // const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      const characters = "0123456789";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
+      }
+      return result;
+    }
+
+    const today = new Date();
+
+    const day = String(today.getDate()).padStart(2, "0");
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+    const year = today.getFullYear();
+
+    const formattedDate = `${day}/${month}/${year}`;
+
+    SetUserDate(formattedDate);
+
+    SetConfirmationId(generateConfirmationId(10));
+  }, []);
+
+
+  useEffect(()=>{
+      setpersoninfo(alldata);
+  },[alldata]);
 
   return (
     <>
-      <section style={{ height: "100vh", overflowY: "scroll" }}>
-        <div className="p-3 border border-dark" >
+      <section
+        className="main-body"
+        style={{ height: "100vh", overflowY: "scroll" }}
+      >
+        <div className="p-1 border border-dark ">
           <div class="d-flex justify-content-end m-2">
             <button
               type="button"
@@ -56,9 +98,9 @@ const TicketDownload = () => {
               Download
             </button>
           </div>
-          <div className="border border-dark rounded-5" ref={pdfRef}>
+          <div className="border border-dark rounded-5 " ref={pdfRef}>
             <div className="d-flexflex-coloumn justify-content-center align-items-center flex-wrap ">
-              <h2 className="text-center bg-primary text-white py-2">
+              <h2 className="text-center rounded-5 bg-primary text-white py-2">
                 SkyOps Pro
               </h2>
               <h3 className="text-center text-dark py-2">
@@ -76,8 +118,8 @@ const TicketDownload = () => {
               </p>
             </div>
             <div className="d-flex justify-content-between mx-2">
-              <h6 className="mx-1">Confirmation ID :{" 123456789"}</h6>
-              <h6 className="mx-1">Booking Date : {"25/04/2025"}</h6>
+              <h6 className="mx-1">Confirmation ID : {confirmationId}</h6>
+              <h6 className="mx-1">Booking Date : {userDate}</h6>
             </div>
             <div className="table-responsive-sm mx-3">
               <table className="table mt-3 table-bordered">
@@ -95,13 +137,13 @@ const TicketDownload = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {passengers.map((passenger) => (
-                    <tr className="text-center res" key={passenger.id}>
-                      <td className="res">{passenger.id}</td>
-                      <td className="res">{passenger.name}</td>
-                      <td className="res">{passenger.ticketNumber}</td>
-                    </tr>
-                  ))}
+                  {/* {passangerdata.map((passenger) => ( */}
+                  <tr className="text-center res">
+                    {/* <td className="res">{passenger.id}</td> */}
+                    <td className="res">{console.log('alldata :',personinfo)}</td>
+                    {/* <td className="res">{passenger.ticketNumber}</td> */}
+                  </tr>
+                  {/* ))} */}
                 </tbody>
               </table>
             </div>
@@ -199,4 +241,5 @@ const TicketDownload = () => {
   );
 };
 
-export default TicketDownload;
+
+export default connect(mapStateToProps)(TicketDownload);

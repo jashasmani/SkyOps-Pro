@@ -1,6 +1,7 @@
 package com.example.demo.contoller;
 
 
+import com.example.demo.model.Flights;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -32,18 +35,27 @@ public class UserController {
 
     @GetMapping("/user/{email}/{password}")
     public ResponseEntity<?> getLogin(@PathVariable Map<String, String> map) {
-        User userobj = userService.get(map.get("email"));
+        String email = map.get("email");
+        String password = map.get("password");
 
-        if (userobj == null) {
-            throw new RuntimeException("User not Found By ID :" + map.get("email"));
-        }
-        if (userobj.getPassword().equals(map.get("password"))) {
-            return ResponseEntity.ok(userobj); // Login successful
+        // Retrieve the user by email
+        List<User> userList = userService.get();
+        Optional<User> userOpt = userList.stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst();
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            if (user.getPassword().equals(password)) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+            }
         } else {
-//            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Invalid email or password"); // Login failed
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+            return ResponseEntity.notFound().build();
         }
     }
+
 
 //    @GetMapping("/user/{id}")
 //    public User get(@PathVariable int id) {

@@ -1,23 +1,20 @@
 import React from "react";
-import data from "./data.js";
 import { Container } from "react-bootstrap";
 import DataModel from "../Model/DataModel.jsx";
 
-const FlightTable = () => {
-  const flightsData = data;
-
-
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await axios.get(
-  //       'http://localhost:8080/main/flights'
-  //     );
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.log("Invalid Data");
-  //   }
-  // };
+const FlightTable = ({ searchdata }) => {
+  if (!searchdata || searchdata.length === 0) {
+    return (
+      <Container className="bg-white rounded-4 my-5 d-flex align-items-center justify-content-center">
+        <div
+          className="d-flex justify-content-center  align-items-center"
+          style={{ height: "10rem" }}
+        >
+          <h2 className="text-center mb-0">  Oops, No Flight Available!</h2>
+        </div>
+      </Container>
+    );
+  }
 
   return (
     <Container className="bg-white rounded-4 my-5 ">
@@ -29,19 +26,19 @@ const FlightTable = () => {
               <th>Duration</th>
               <th>ATDT</th>
               <th>Flight Number</th>
-              <th>Service Class</th>
-              <th>Price </th>
+              {/* <th>Service Class</th> */}
+              <th>Price</th>
             </tr>
           </thead>
           <tbody className="text-center">
-            {flightsData.map((flight) => (
-              <tr key={flight.flightNumber}>
+            {searchdata.map((flight) => (
+              <tr key={flight.id_flight}>
                 <td className="source-time d-flex flex-column ">
                   <span style={{ fontSize: "1.2rem " }}>
-                    {flight.departureTime}
+                    {flight.departure_time}
                   </span>
                   <span style={{ fontSize: "1rem" }}>
-                    {flight.sourceAirport}
+                    {flight.departure_airport}
                   </span>
                 </td>
                 <td className="align-middle" style={{ fontSize: "1rem" }}>
@@ -51,27 +48,20 @@ const FlightTable = () => {
                 </td>
                 <td className="source-time d-flex flex-column">
                   <span style={{ fontSize: "1.2rem" }}>
-                    {flight.arrivalTime}
+                    {flight.arrival_time}
                   </span>
                   <span style={{ fontSize: "1rem" }}>
-                    {flight.destinationAirport}
+                    {flight.arrival_airport}
                   </span>
                 </td>
                 <td className="align-middle" style={{ fontSize: "1rem" }}>
-                  {flight.flightNumber}
-                </td>
-                
-                <td className="align-middle" style={{ fontSize: "1rem" }}>
-                  {flight.serviceClass}
+                  {flight.flight_number}
                 </td>
                 <td className="align-middle">
-                  {/* <button type="button" className="btn btn-success"> */}
                   <DataModel
                     flight={flight}
                     style={{ position: "absolute", zIndex: 99 }}
                   />
-
-                  {/* </button> */}
                 </td>
               </tr>
             ))}

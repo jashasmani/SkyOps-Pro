@@ -1,32 +1,6 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
-// const flightsData = [
-//   {
-//     name: "Jash Asmani",
-//     age: 21,
-//     category: "Bus",
-//     price: 4500,
-//   },
-//   {
-//     name: "Riya Jivani",
-//     age: 21,
-//     category: "Bus",
-//     price: 4500,
-//   },
-//   {
-//     name: "Nirj Naist",
-//     age: 21,
-//     category: "Bus",
-//     price: 4500,
-//   },
-//   {
-//     name: "Prit Dholariya",
-//     age: 21,
-//     category: "Bus",
-//     price: 4500,
-//   },
-// ];
 
 const Verifcation = ({ allData }) => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -51,45 +25,57 @@ const Verifcation = ({ allData }) => {
         <table className="table">
           <thead>
             <tr className="text-center" style={{ maxWidth: "auto" }}>
-              <th className="text-black">Name</th>
-              <th className="text-black">Age</th>
-              <th className="text-black">Category</th>
-              <th className="text-black">Price (Rs)</th>
+              <th className="text-black p-2">Name</th>
+              <th className="text-black p-2">Age</th>
+              <th className="text-black p-2">Category</th>
+              <th className="text-black p-2">Price (Rs)</th>
             </tr>
           </thead>
           <tbody className="text-center">
             <tr>
-              <td>{allData.pname1}</td>
-              <td>{allData.page1}</td>
-              <td>{allData.pcategory}</td>
-              <td>{allData.totalprice}</td>
+              <td className="p-2">{allData.pname1}</td>
+              <td className="p-2">{allData.page1}</td>
+              <td className="p-2">{allData.pcategory}</td>
+              <td className="p-2">
+                {allData.totalprice}
+                {" Rs"}
+              </td>
             </tr>
             {allData.pname2 !== null ? (
               <tr>
-                <td>{allData.pname2}</td>
-                <td>{allData.page2}</td>
-                <td>{allData.pcategory}</td>
-                <td>{allData.totalprice}</td>
+                <td className="p-2">{allData.pname2}</td>
+                <td className="p-2">{allData.page2}</td>
+                <td className="p-2">{allData.pcategory}</td>
+                <td className="p-2">
+                  {allData.totalprice}
+                  {" Rs"}
+                </td>
               </tr>
             ) : (
               ""
             )}
             {allData.pname3 !== null ? (
               <tr>
-                <td>{allData.pname3}</td>
-                <td>{allData.page3}</td>
-                <td>{allData.pcategory}</td>
-                <td>{allData.totalprice}</td>
+                <td className="p-2">{allData.pname3}</td>
+                <td className="p-2">{allData.page3}</td>
+                <td className="p-2">{allData.pcategory}</td>
+                <td className="p-2">
+                  {allData.totalprice}
+                  {" Rs"}
+                </td>
               </tr>
             ) : (
               ""
             )}
             {allData.pname4 !== null ? (
               <tr>
-                <td>{allData.pname4}</td>
-                <td>{allData.page4}</td>
-                <td>{allData.pcategory}</td>
-                <td>{allData.totalprice}</td>
+                <td className="p-2">{allData.pname4}</td>
+                <td className="p-2">{allData.page4}</td>
+                <td className="p-2">{allData.pcategory}</td>
+                <td className="p-2">
+                  {allData.totalprice}
+                  {" Rs"}
+                </td>
               </tr>
             ) : (
               ""

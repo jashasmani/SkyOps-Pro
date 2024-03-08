@@ -5,19 +5,21 @@ import SelectCategory from "../Dropdown/SelectCategory";
 import StatusContent1 from "./Status_Content_1";
 
 const Status1 = ({
-  price,
+  flight,
   setNameProps,
   setAgeProps,
   setEmailProps,
   setContactProps,
   setCategoryprops,
+  setPriceProps,
 }) => {
   const [selectedValue, setSelectedValue] = useState(1);
-  const [names, setNames] = useState([]);
-  const [ages, setAges] = useState([]);
+  const [, setNames] = useState([]);
+  const [, setAges] = useState([]);
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
-  // const [category, setCategory] = useState("");
+
+  const [categoryprops, setCategory] = useState();
 
   const handleSelect = (value) => {
     setSelectedValue(value);
@@ -54,6 +56,15 @@ const Status1 = ({
         />
       );
     }
+    // let price;
+    if (categoryprops === "First Economy") {
+      setPriceProps(flight.first_class_price);
+    } else if (categoryprops === "Business Class") {
+      setPriceProps(flight.business_class_price);
+    } else if (categoryprops === "Economy Class") {
+      setPriceProps(flight.economy_class_price);
+    }
+
     return statusContent;
   };
 
@@ -70,7 +81,17 @@ const Status1 = ({
           >
             <SelectPerson onSelect={handleSelect} />
             <div className="mx-3">
-              <h6 className="text-dark">{price}</h6>
+              <h6 className="text-dark">
+                {categoryprops} :{" "}
+                {categoryprops === "First Economy"
+                  ? flight.first_class_price
+                  : categoryprops === "Business Class"
+                  ? flight.business_class_price
+                  : categoryprops === "Economy Class"
+                  ? flight.economy_class_price
+                  : ""}
+                {" Rs"}
+              </h6>
             </div>
           </div>
 
@@ -119,7 +140,10 @@ const Status1 = ({
                 </div>
               </div>
               <div className="d-flex flex-row-reverse align-middle my-2 me-0 ">
-                <SelectCategory setItem={setCategoryprops} />
+                <SelectCategory
+                  setItem={setCategoryprops}
+                  setItem2={setCategory}
+                />
 
                 {/* <SelectAgeCategory /> */}
               </div>

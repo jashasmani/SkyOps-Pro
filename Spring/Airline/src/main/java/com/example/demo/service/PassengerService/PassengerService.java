@@ -6,12 +6,14 @@ import com.example.demo.model.Passenger;
 import java.util.List;
 
 public interface PassengerService {
+
     List<Passenger> get();
 
-    //    User get(int id);
-    Passenger get(long id);
+    List<Passenger> getUserById(int id);
 
-    void save(Passenger user);
+    Passenger get(int id);
+
+    void save(Passenger passenger);
 
     void delete(long id);
 }

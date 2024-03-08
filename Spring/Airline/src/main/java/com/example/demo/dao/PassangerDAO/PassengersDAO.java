@@ -9,7 +9,9 @@ public interface PassengersDAO {
 
     List<Passenger> get();
 
-    Passenger get(long id);
+    List<Passenger> getByUserId(int userId);
+
+    Passenger get(int id);
 
     void save(Passenger passengers);
 

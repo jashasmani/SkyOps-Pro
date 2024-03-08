@@ -25,9 +25,9 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public User get(String email) {
+    public User get(int id) {
         Session session=entityManager.unwrap(Session.class);
-        return session.get(User.class,email);
+        return session.get(User.class,id);
     }
 
     @Override

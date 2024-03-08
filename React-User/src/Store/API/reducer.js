@@ -5,8 +5,8 @@ const pageReducer = (state = [], action) => {
     case ALLDATA:
       return [
         ...state,
-        { ...action.payload.alldata, ...action.payload.flightdata },
-      ];
+        action.payload ,
+      ];  
     default:
       return state;
   }
