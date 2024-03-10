@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
-
 const Verifcation = ({ allData }) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const calculateTotalPrice = () => {
-    if (allData.pname4 !== null) {
-      setTotalPrice(allData.totalprice * 4);
-    } else if (allData.pname3 !== null) {
-      setTotalPrice(allData.totalprice * 3);
-    } else if (allData.pname2 !== null) {
-      setTotalPrice(allData.totalprice * 2);
-    } else if (allData.pname1 !== null) {
-      setTotalPrice(allData.totalprice * 1);
-    }
-  };
   useState(() => {
+    const calculateTotalPrice = () => {
+      if (allData.pname4 !== null) {
+        setTotalPrice(4);
+      } else if (allData.pname3 !== null) {
+        setTotalPrice(3);
+      } else if (allData.pname2 !== null) {
+        setTotalPrice(2);
+      } else if (allData.pname1 !== null) {
+        setTotalPrice(1);
+      }
+    };
     calculateTotalPrice();
-  }, []);
+  }, [allData]);
+
   return (
     <Container className="bg-white " style={{ height: "330px" }}>
       <div className="table-responsive ">
@@ -85,7 +85,7 @@ const Verifcation = ({ allData }) => {
       </div>
       <div className="text-black d-flex  justify-content-end my-1">
         <span className="align-middle text-black" style={{ fontWeight: "500" }}>
-          Total : {totalPrice} Rs
+          Total : {allData.totalprice*totalPrice} Rs
         </span>
       </div>
     </Container>

@@ -25,11 +25,11 @@ public class Flights {
     @Column
     private String date;
     @Column
-    private float business_class_seat;
+    private int business_class_seat;
     @Column
-    private float economy_class_seat;
+    private int economy_class_seat;
     @Column
-    private float first_class_seat;
+    private int first_class_seat;
     @Column
     private float business_class_price;
     @Column
@@ -101,27 +101,27 @@ public class Flights {
         this.flight_number = flight_number;
     }
 
-    public float getBusiness_class_seat() {
+    public int getBusiness_class_seat() {
         return business_class_seat;
     }
 
-    public void setBusiness_class_seat(float business_class_seat) {
+    public void setBusiness_class_seat(int business_class_seat) {
         this.business_class_seat = business_class_seat;
     }
 
-    public float getEconomy_class_seat() {
+    public int getEconomy_class_seat() {
         return economy_class_seat;
     }
 
-    public void setEconomy_class_seat(float economy_class_seat) {
+    public void setEconomy_class_seat(int economy_class_seat) {
         this.economy_class_seat = economy_class_seat;
     }
 
-    public float getFirst_class_seat() {
+    public int getFirst_class_seat() {
         return first_class_seat;
     }
 
-    public void setFirst_class_seat(float first_class_seat) {
+    public void setFirst_class_seat(int first_class_seat) {
         this.first_class_seat = first_class_seat;
     }
 

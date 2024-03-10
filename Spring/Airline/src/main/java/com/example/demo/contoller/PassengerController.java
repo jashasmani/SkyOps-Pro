@@ -3,6 +3,7 @@ package com.example.demo.contoller;
 import com.example.demo.model.Flights;
 import com.example.demo.model.Passenger;
 import com.example.demo.model.User;
+import com.example.demo.service.FlightService.FlightService;
 import com.example.demo.service.PassengerService.PassengerService;
 import com.example.demo.service.UserService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class PassengerController {
     private PassengerService passengerService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private FlightService flightService;
 
 
     @GetMapping("/passenger")
@@ -50,15 +53,17 @@ public class PassengerController {
         return passenger;
     }
 
-    @PostMapping("/passenger/{id}")
-    public ResponseEntity<?> storeDetails(@RequestBody Passenger passenger, @PathVariable int id) {
-        User user1 = userService.get(id);
+    @PostMapping("/passenger/{id}/{flightid}")
+    public ResponseEntity<?> storeDetails(@RequestBody Passenger passenger, @PathVariable Map<String, String> map) {
+        User user1 = userService.get(Integer.parseInt(map.get("id")));
+        Flights flights = flightService.get(Integer.parseInt(map.get("flightid")));
 
         if (user1 == null) {
-            return ResponseEntity.badRequest().body("User not found with ID: " + id);
+            return ResponseEntity.badRequest().body("User not found with ID: " + map.get("id"));
         } else {
             if (passenger != null) {
                 passenger.setPassengeruser(user1);
+                passenger.setFlights(flights);
                 passengerService.save(passenger);
                 return ResponseEntity.ok(passenger);
             } else {

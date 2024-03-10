@@ -124,8 +124,11 @@ function AppAppBar({ mode, toggleColorMode }) {
                 size="small"
                 component="a"
                 href="/signup"
+                onClick={() =>
+                  localStorage.setItem("id", '')
+                }
               >
-                Sign in
+                Log Out
               </Button>
               <Button
                 className="text-primary"
@@ -134,6 +137,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 size="small"
                 component="a"
                 href="/signup"
+                
               >
                 Sign up
               </Button>
@@ -195,9 +199,12 @@ function AppAppBar({ mode, toggleColorMode }) {
                       variant="contained"
                       component="a"
                       href="/signup"
+                      onClick={() =>
+                        localStorage.setItem("id", '')
+                      }
                       sx={{ width: "100%" }}
                     >
-                      Sign up
+                      Log Out
                     </Button>
                   </MenuItem>
                   <MenuItem>

@@ -42,6 +42,18 @@ public class Passenger {
     @JoinColumn(name = "User_FK")
     private User passengeruser;
 
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER    )
+    @JoinColumn(name = "Flight_FK")
+    private Flights flights;
+
+    public Flights getFlights() {
+        return flights;
+    }
+
+    public void setFlights(Flights flights) {
+        this.flights = flights;
+    }
+
     public User getPassengeruser() {
         return passengeruser;
     }

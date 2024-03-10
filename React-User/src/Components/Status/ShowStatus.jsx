@@ -13,6 +13,7 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 import { UserContext } from "../Home/Home";
+import { Person } from "@mui/icons-material";
 
 const ShowStatus = ({ setOpen, flight }) => {
   const { token } = theme.useToken();
@@ -25,50 +26,113 @@ const ShowStatus = ({ setOpen, flight }) => {
   const [priceProps, setPriceProps] = useState();
   const [allData, setAllData] = useState([]);
   const [count, setCount] = useState(0);
-  const [id] = useState(localStorage.getItem('id'));
-  // const user = useRef();
+  const [businessClassSeat, setBusinessClassSeat] = useState(
+    flight.business_class_seat
+  );
+  const [firstClassSeat, setFirstClassSeat] = useState(flight.first_class_seat);
+  const [economyClassSeat, setEconomyClassSeat] = useState(
+    flight.economy_class_seat
+  );
+  const [id] = useState(localStorage.getItem("id"));
+
+  const fetchData = async () => {
+    console.log(id);
+    try {
+      const postData = {
+        user_fk: id,
+        pname1: nameProps[0],
+        pname2: nameProps[1],
+        pname3: nameProps[2],
+        pname4: nameProps[3],
+        page1: ageProps[0],
+        page2: ageProps[1],
+        page3: ageProps[2],
+        page4: ageProps[3],
+        pemail: emailProps,
+        pcontact: contactProps,
+        pcategory: categoryprops,
+        totalprice: priceProps,
+      };
+
+      axios
+        .post(`http://localhost:8080/ticket/passenger/${id}/${flight.id_flights}`, postData)
+        .then((response) => {
+          console.log(response.data);
+          setAllData(response.data);
+        });
+      setCount(1);
+    } catch (error) {
+      console.log("Invalid Data");
+    }
+  };
 
   const next = () => {
     setCurrent(current + 1);
 
-    const fetchData = async () => {
-      console.log(id);
-      try {
-        const postData = {
-          user_fk: id,
-          pname1: nameProps[0],
-          pname2: nameProps[1],
-          pname3: nameProps[2],
-          pname4: nameProps[3],
-          page1: ageProps[0],
-          page2: ageProps[1],
-          page3: ageProps[2],
-          page4: ageProps[3],
-          pemail: emailProps,
-          pcontact: contactProps,
-          pcategory: categoryprops,
-          totalprice: priceProps,
-        };
-
-        axios
-          .post(`http://localhost:8080/ticket/passenger/${id}`, postData)
-          .then((response) => {
-            console.log(response.data);
-            setAllData(response.data);
-          });
-        setCount(1);
-      } catch (error) {
-        console.log("Invalid Data");
-      }
-    };
     if (current === 0 && count === 0) {
       fetchData();
+      decrementSeats(categoryprops, nameProps);
     }
   };
 
   const prev = () => {
     setCurrent(current - 1);
   };
+
+  const decrementSeats = (seatType, nameProps) => {
+    console.log("seat", seatType, "props", nameProps);
+    if (
+      seatType === "First Economy" ||
+      seatType === "Business Class" ||
+      seatType === "Economy Class"
+    ) {
+      let seats = 0;
+      if (nameProps[3]) {
+        seats = 4;
+      } else if (nameProps[2]) {
+        seats = 3;
+      } else if (nameProps[1]) {
+        seats = 2;
+      } else if (nameProps[0]) {
+        seats = 1;
+      }
+      console.log(seats);
+      console.log(nameProps[0]);
+      switch (seatType) {
+        case "First Economy":
+          console.log(firstClassSeat);
+          setFirstClassSeat((prevState) => prevState - seats);
+          break;
+        case "Business Class":
+          setBusinessClassSeat((prevState) => prevState - seats);
+          break;
+        case "Economy Class":
+          setEconomyClassSeat((prevState) => prevState - seats);
+          break;
+        default:
+          break;
+      }
+    }
+  };
+  useEffect(() => {
+    const handleUpadate = async (e) => {
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/main/upadteseatflights/${flight.id_flights}`,
+          {
+            business_class_seat: businessClassSeat,
+            economy_class_seat: economyClassSeat,
+            first_class_seat: firstClassSeat,
+          }
+        );
+        console.log(response.data);
+        console.info("Sucees");
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    handleUpadate();
+  }, [businessClassSeat, economyClassSeat, firstClassSeat, flight.id_flights]);
 
   const steps = [
     {

@@ -36,11 +36,7 @@ public class FlightController {
 
         List<Flights> allFlights = flightService.get();
 
-        List<Flights> filteredFlights = allFlights.stream()
-                .filter(flight -> departureAirport == null || flight.getDeparture_airport().equals(departureAirport))
-                .filter(flight -> arrivalAirport == null || flight.getArrival_airport().equals(arrivalAirport))
-                .filter(flight -> dateString == null || dateString.equals("Invalid Date") || flight.getDate().equals(dateString))
-                .collect(Collectors.toList());
+        List<Flights> filteredFlights = allFlights.stream().filter(flight -> departureAirport == null || flight.getDeparture_airport().equals(departureAirport)).filter(flight -> arrivalAirport == null || flight.getArrival_airport().equals(arrivalAirport)).filter(flight -> dateString == null || dateString.equals("Invalid Date") || flight.getDate().equals(dateString)).collect(Collectors.toList());
 
 
         if (filteredFlights.isEmpty()) {
@@ -75,6 +71,23 @@ public class FlightController {
             existingFlight.setBusiness_class_price(flights.getBusiness_class_price());
             existingFlight.setEconomy_class_price(flights.getEconomy_class_price());
             existingFlight.setFirst_class_price(flights.getFirst_class_price());
+
+            flightService.save(existingFlight);
+            return ResponseEntity.ok(existingFlight);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    @PutMapping("/upadteseatflights/{id}")
+    public ResponseEntity<Flights> updateSeats(@PathVariable int id, @RequestBody Flights flights) {
+        Flights existingFlight = flightService.get(id);
+        if (existingFlight != null) {
+
+            existingFlight.setBusiness_class_seat(flights.getBusiness_class_seat());
+            existingFlight.setEconomy_class_seat(flights.getEconomy_class_seat());
+            existingFlight.setFirst_class_seat(flights.getFirst_class_seat());
 
             flightService.save(existingFlight);
             return ResponseEntity.ok(existingFlight);
