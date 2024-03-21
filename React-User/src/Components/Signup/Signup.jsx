@@ -41,10 +41,10 @@ const DesignBlock = () => {
     try {
       const response = await axios.post("http://localhost:8080/api/user", {
         email,
-        contactme:contact,
+        contactme: contact,
         password,
       });
-      setTitle('Sign In')
+      setTitle("Sign In");
       toast.warn("🦄 Wow so easy!", {
         position: "top-right",
         autoClose: 5000,
@@ -54,7 +54,7 @@ const DesignBlock = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-      }); 
+      });
       console.log(response.data);
       // setTitle("Login");
     } catch (error) {
@@ -71,19 +71,16 @@ const DesignBlock = () => {
               className="my-5 display-5 fw-bold ls-tight"
               style={{ color: "hsl(218, 81%, 95%)" }}
             >
-              The best offer <br />
-              <span style={{ color: "hsl(218, 81%, 75%)" }}>
-                for your business
-              </span>
+              Fly smarter, <br />
+              <span style={{ color: "hsl(218, 81%, 75%)" }}>book cheaper</span>
             </h1>
             <p
               className="mb-4 opacity-70"
               style={{ color: "hsl(218, 81%, 85%)" }}
             >
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Temporibus, expedita iusto veniam atque, magni tempora mollitia
-              dolorum consequatur nulla, neque debitis eos reprehenderit quasi
-              ab ipsum nisi dolorem modi. Quos?
+              Welcome to our flight booking platform! Simplify travel. Easy
+              booking. Wide destinations. Competitive prices. Sign in for deals.
+              Personalized recommendations. Let's fly!
             </p>
           </div>
 
@@ -138,7 +135,6 @@ const DesignBlock = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    
                   </div>
 
                   <div className="form-outline mb-3">
@@ -152,7 +148,6 @@ const DesignBlock = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
-                    
                   </div>
 
                   <button
