@@ -26,7 +26,7 @@ SkyOps Pro is an Airline Management System developed with React for the frontend
 - **Backend:** Spring Boot
 - **Database:** MySQL
 
-## Getting Started
+<!-- ## Getting Started
 
 To get a local copy up and running follow these simple steps:
 
@@ -74,6 +74,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@example.com
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - asmanijash51@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name) -->
