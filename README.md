@@ -27,7 +27,3 @@ SkyOps Pro is an Airline Management System developed with React for the frontend
 - **Database:** MySQL
 
 
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - asmanijash51@gmail.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name) -->
