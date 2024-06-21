@@ -17,7 +17,6 @@ const DesignBlock = () => {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("Sign In");
   const [error, setError] = useState(false);
-  const [userId, setUserId] = useState(0);
 
   const nav = useNavigate();
 
